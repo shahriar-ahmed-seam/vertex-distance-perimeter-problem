@@ -1,0 +1,59 @@
+% Chapter 18: 3D Tetrahedron Generalization
+\chapter{3D Tetrahedron Generalization}
+\label{ch:tetrahedron}
+
+\section{Problem Statement}
+Given a tetrahedron $ABCD$ in $\R^3$ and an interior point $P$, with known distances $d_1 = PA$, $d_2 = PB$, $d_3 = PC$, $d_4 = PD$, determine the surface area and volume of the tetrahedron.
+
+\section{Degrees of Freedom}
+A tetrahedron has $4 \times 3 = 12$ coordinate parameters, minus $6$ for rigid motions (3 translations + 3 rotations), leaving $6$ intrinsic degrees of freedom (the 6 edge lengths). An interior point adds $3$ positional parameters. Total: $6 + 3 = 9$ unknowns.
+
+The 4 distance measurements provide 4 constraints, leaving a deficit of $\mathbf{5}$. The problem is vastly more underdetermined than the 2D case.
+
+\section{The 6×6 Cayley--Menger Determinant}
+For 5 points in $\R^3$, the Cayley--Menger determinant is a $7 \times 7$ matrix. Setting this determinant to zero (coplanarity in 4D, which is automatic since our points are in 3D) gives one polynomial constraint on the 10 pairwise distances.
+
+\begin{equation}
+\CM_5 = \begin{vmatrix}
+0 & 1 & 1 & 1 & 1 & 1 \\
+1 & 0 & D_{AB} & D_{AC} & D_{AD} & d_1^2 \\
+1 & D_{AB} & 0 & D_{BC} & D_{BD} & d_2^2 \\
+1 & D_{AC} & D_{BC} & 0 & D_{CD} & d_3^2 \\
+1 & D_{AD} & D_{BD} & D_{CD} & 0 & d_4^2 \\
+1 & d_1^2 & d_2^2 & d_3^2 & d_4^2 & 0
+\end{vmatrix} = 0.
+\end{equation}
+
+\section{Volume from Distances}
+The volume of the tetrahedron itself (without the interior point) is given by the $5 \times 5$ Cayley--Menger determinant:
+\begin{equation}
+288 \vol^2 = \begin{vmatrix}
+0 & 1 & 1 & 1 & 1 \\
+1 & 0 & D_{AB} & D_{AC} & D_{AD} \\
+1 & D_{AB} & 0 & D_{BC} & D_{BD} \\
+1 & D_{AC} & D_{BC} & 0 & D_{CD} \\
+1 & D_{AD} & D_{BD} & D_{CD} & 0
+\end{vmatrix}.
+\end{equation}
+
+\section{Analogy with the 2D Problem}
+\begin{table}[h!]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Property} & \textbf{2D (Triangle)} & \textbf{3D (Tetrahedron)} \\
+\midrule
+Shape DoF & 3 (side lengths) & 6 (edge lengths) \\
+Point DoF & 2 & 3 \\
+Measurements & 3 (distances) & 4 (distances) \\
+Deficit & 2 & 5 \\
+CM matrix size & $5 \times 5$ & $7 \times 7$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Constrained Cases}
+\begin{itemize}
+    \item \textbf{Regular tetrahedron} ($a = b = c = d = e = f = s$): 1 DoF, 4 measurements → overdetermined.
+    \item \textbf{Right-angled tetrahedron}: 3 edges mutually perpendicular, reducing DoF to 3.
+\end{itemize}

@@ -1,0 +1,42 @@
+% Chapter 16: Spherical Geometry Extension
+\chapter{Spherical Geometry Extension}
+\label{ch:spherical}
+
+\section{Motivation}
+Extending the VDPP to the sphere is natural for applications in geodesy, navigation, and astronomy, where ``triangles'' are formed by three points on a sphere connected by great-circle arcs.
+
+\section{Spherical Triangle Setup}
+Let $S^2(R)$ denote the sphere of radius $R$. A \emph{spherical triangle} $\tri ABC$ on $S^2(R)$ has vertices $A, B, C$ and sides that are arcs of great circles. The side ``lengths'' are the angular measures $a, b, c \in (0, \pi)$ (or the arc lengths $Ra, Rb, Rc$).
+
+An interior point $P$ on the sphere has \emph{angular distances} $\delta_1, \delta_2, \delta_3$ to the vertices:
+\begin{equation}
+\delta_i = \frac{1}{R}\dist{P}{V_i}, \quad i = 1, 2, 3,
+\end{equation}
+where the distance is measured along the great circle.
+
+\section{The Spherical Law of Cosines}
+The side lengths are related to the angles at $P$ via the \emph{spherical law of cosines}:
+\begin{equation}
+\cos a = \cos\delta_2 \cos\delta_3 + \sin\delta_2 \sin\delta_3 \cos\alpha,
+\end{equation}
+where $\alpha = \angle BPC$ is the dihedral angle at $P$ between the great-circle arcs $PB$ and $PC$. Compare with the Euclidean formula $a^2 = d_2^2 + d_3^2 - 2d_2 d_3\cos\alpha$.
+
+\section{Spherical Cayley--Menger Analogue}
+The Cayley--Menger framework extends to spherical geometry by replacing Euclidean squared distances with $1 - \cos\delta_{ij}$ (or equivalently, the chordal distances). The \emph{spherical Gram matrix} is:
+\begin{equation}
+G_{ij} = \cos\delta_{ij} = \hat{P}_i \cdot \hat{P}_j,
+\end{equation}
+where $\hat{P}_i$ are unit vectors from the sphere's center to each point. The coplanarity condition (four points on a sphere lie on a common great sphere) is expressed by:
+\begin{equation}
+\det(G) = 0 \quad \text{for the } 4 \times 4 \text{ Gram matrix}.
+\end{equation}
+
+\section{Spherical Perimeter}
+The spherical perimeter is:
+\begin{equation}
+\perim_{\text{sph}} = R(a + b + c),
+\end{equation}
+and the analysis parallels the Euclidean case, with trigonometric functions of arc lengths replacing polynomial expressions.
+
+\section{Flat Limit}
+As $R \to \infty$ with the triangle size fixed, the spherical formulas reduce to the Euclidean ones via the approximation $\cos\delta \approx 1 - \delta^2/2$.

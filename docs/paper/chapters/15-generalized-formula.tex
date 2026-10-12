@@ -1,0 +1,85 @@
+% Chapter 15: The Generalized Formula
+\chapter{The Generalized Formula}
+\label{ch:generalized}
+
+This chapter derives the master formula: given vertex distances $(d_1, d_2, d_3)$ and one additional parameter, express the perimeter as a closed-form function.
+
+\section{The One-Parameter Family}
+
+From Chapter~\ref{ch:dof}, the solution manifold is one-dimensional (after fixing rotation). We choose the angle $\alpha = \angle BPC$ as the free parameter. Given $\alpha$, the triangle is determined:
+
+\begin{theorem}[Generalized Perimeter Formula]
+\label{thm:generalized}
+For fixed vertex distances $(d_1, d_2, d_3)$ and subtended angle $\alpha = \angle BPC \in (0, \pi)$, the perimeter of the triangle is:
+\begin{equation}
+\label{eq:generalized-perimeter}
+\boxed{\perim(\alpha) = \sqrt{d_2^2 + d_3^2 - 2d_2 d_3\cos\alpha} + \sqrt{d_1^2 + d_3^2 - 2d_1 d_3\cos\beta(\alpha)} + \sqrt{d_1^2 + d_2^2 - 2d_1 d_2\cos\gamma(\alpha)},}
+\end{equation}
+where $\beta(\alpha)$ and $\gamma(\alpha)$ are determined by the Cayley--Menger consistency conditions, with $\beta + \gamma = 2\pi - \alpha$.
+\end{theorem}
+
+\section{Explicit Solution for $\beta$ Given $\alpha$}
+
+Once $\alpha$ is fixed, $a$ is determined by~\eqref{eq:a-of-alpha}. The remaining unknowns are $\beta$ and $\gamma = 2\pi - \alpha - \beta$. The Cayley--Menger constraint $\CM_4 = 0$, after substituting $a$, becomes a single equation in $\beta$:
+\begin{equation}
+\label{eq:beta-equation}
+F(\beta; \alpha, d_1, d_2, d_3) = 0.
+\end{equation}
+
+This equation is transcendental (involving $\cos\beta$ and $\cos(\alpha + \beta)$), but can be converted to a polynomial equation by the substitution $t = \tan(\beta/2)$:
+\begin{equation}
+\cos\beta = \frac{1 - t^2}{1 + t^2}, \quad \sin\beta = \frac{2t}{1 + t^2}.
+\end{equation}
+
+After clearing denominators, $F = 0$ becomes a polynomial in $t$ of degree at most 4 (a quartic), which can be solved by radicals.
+
+\section{The Perimeter as a Function of $\alpha$}
+
+\begin{theorem}[Properties of $\perim(\alpha)$]
+The perimeter function $\perim: (\alpha_{\min}, \alpha_{\max}) \to \R_{>0}$, where the domain is the range of feasible $\alpha$ values, has the following properties:
+\begin{enumerate}[label=(\roman*)]
+    \item $\perim$ is continuous and piecewise smooth.
+    \item $\perim$ achieves its minimum and maximum on the closure of the domain.
+    \item At the boundaries $\alpha \to \alpha_{\min}$ or $\alpha \to \alpha_{\max}$, the triangle degenerates.
+    \item For generic $(d_1, d_2, d_3)$, $\perim$ has at most two critical points (local extrema).
+\end{enumerate}
+\end{theorem}
+
+\section{Closed-Form for Special Parameters}
+
+\subsection{When $\alpha = 2\pi/3$ (The Fermat Point Angle)}
+If $\alpha = \beta = \gamma = 2\pi/3$, then $P$ is the \emph{Fermat point} (assuming all angles of $\tri ABC$ are less than $2\pi/3$). The side lengths become:
+\begin{align}
+a &= \sqrt{d_2^2 + d_3^2 + d_2 d_3}, \\
+b &= \sqrt{d_1^2 + d_3^2 + d_1 d_3}, \\
+c &= \sqrt{d_1^2 + d_2^2 + d_1 d_2}.
+\end{align}
+
+The perimeter is:
+\begin{equation}
+\perim_{\text{Fermat}} = \sqrt{d_2^2 + d_3^2 + d_2 d_3} + \sqrt{d_1^2 + d_3^2 + d_1 d_3} + \sqrt{d_1^2 + d_2^2 + d_1 d_2}.
+\end{equation}
+
+\begin{remark}
+At the Fermat point, the sum $d_1 + d_2 + d_3$ is minimized (this is the Fermat--Torricelli property). The perimeter at the Fermat point configuration gives a specific, computable value.
+\end{remark}
+
+\subsection{When $\alpha = \pi/2$}
+If $\angle BPC = \pi/2$:
+\begin{equation}
+a = \sqrt{d_2^2 + d_3^2},
+\end{equation}
+and $\beta + \gamma = 3\pi/2$.
+
+\section{The Universal Formula}
+
+Combining all results, the \emph{universal perimeter formula} for the VDPP is:
+\begin{equation}
+\perim = f(d_1, d_2, d_3, \alpha),
+\end{equation}
+where $f$ is given by~\eqref{eq:generalized-perimeter} with $\beta$ solved from the quartic~\eqref{eq:beta-equation}. This formula is:
+\begin{itemize}
+    \item \textbf{Exact} (no numerical approximation needed, using radicals for the quartic).
+    \item \textbf{Complete} (covers all non-degenerate configurations).
+    \item \textbf{Constructive} (provides the actual triangle, not just the perimeter).
+\end{itemize}

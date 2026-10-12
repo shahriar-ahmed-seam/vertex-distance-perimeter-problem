@@ -1,0 +1,132 @@
+% Chapter 10: Existence and Uniqueness
+% ============================================================
+
+\chapter{Existence and Uniqueness}
+\label{ch:existence}
+
+This chapter rigorously establishes the conditions under which the VDPP admits solutions, characterizes the number of solutions under various constraints, and proves existence and uniqueness theorems.
+
+\section{Existence of Configurations}
+
+\begin{theorem}[Existence]
+\label{thm:existence}
+For any triple $(d_1, d_2, d_3)$ of positive real numbers, there exist infinitely many VDPP configurations $(\tri ABC, P)$ with $PA = d_1$, $PB = d_2$, $PC = d_3$.
+\end{theorem}
+
+\begin{proof}
+Place $P$ at the origin. Set $A = (d_1, 0)$. For any $\theta_2 \in (0, 2\pi)$, set $B = (d_2\cos\theta_2, d_2\sin\theta_2)$, and for any $\theta_3 \in (0, 2\pi) \setminus \{\theta_2\}$, set $C = (d_3\cos\theta_3, d_3\sin\theta_3)$.
+
+The three points $A$, $B$, $C$ form a non-degenerate triangle whenever they are non-collinear, i.e., whenever $\theta_2 \neq 0, \pi$ and $\theta_3$ does not make $A$, $B$, $C$ collinear. Since the set of degenerate configurations has measure zero in $(\theta_2, \theta_3)$-space, there exist uncountably many valid choices.
+
+For $P$ to be in the interior of $\tri ABC$, we need the three angles $\alpha, \beta, \gamma$ at $P$ to each be less than $\pi$, which corresponds to the vertices being arranged so that $P$ sees them within half-turns. The feasible domain $\Omega$ is a non-empty open set (it contains, for example, $(\theta_2, \theta_3) = (2\pi/3, 4\pi/3)$), proving the existence of infinitely many configurations.
+\end{proof}
+
+\section{The Solution Manifold is One-Dimensional}
+
+\begin{theorem}[Manifold Dimension]
+\label{thm:manifold-dim}
+For generic $(d_1, d_2, d_3) \in \R_{>0}^3$, the solution manifold $\mathcal{M}(d_1, d_2, d_3)$ is a smooth one-dimensional submanifold of $\R_{>0}^3$ (parameterized by side lengths $(a, b, c)$).
+\end{theorem}
+
+\begin{proof}
+The solution manifold is the image of the map $\Phi: \Omega \to \R_{>0}^3$ defined by:
+\begin{equation}
+\Phi(\alpha, \beta) = (a(\alpha), b(\beta), c(\alpha, \beta)),
+\end{equation}
+where $\Omega \subset \R^2$ is two-dimensional. By the implicit function theorem, if the Jacobian $D\Phi$ has rank 2 at a point (which it generically does), then the image is two-dimensional in $(a, b, c)$-space.
+
+However, all points in the image satisfy the Cayley--Menger constraint $\CM_4 = 0$, which is a smooth hypersurface in $(a, b, c)$-space when $(d_1, d_2, d_3)$ are fixed. The intersection of the two-dimensional image with this codimension-1 constraint generically yields a one-dimensional manifold.
+
+More precisely: the two angular parameters $(\alpha, \beta)$ span a 2-dimensional domain. The three side lengths $(a, b, c)$ are smooth functions of $(\alpha, \beta)$, and the Cayley--Menger constraint provides one polynomial relation among $(a, b, c)$ (given $(d_1, d_2, d_3)$). But this constraint is \emph{automatically satisfied} by construction (all configurations lie in the plane), so it does not further reduce the dimension.
+
+The correct count: the map $(\alpha, \beta) \mapsto (a, b, c)$ is generically two-to-one (due to $\pm$ choices in the square root when inverting the cosine), so the image is generically a two-dimensional surface. The constraint that $(a, b, c)$ form a valid triangle and that $P$ is in the interior adds further restrictions, but the generic dimension of the solution set in triangle-shape space is~1 (after noting that the map $\Phi$ factors through the angular sum constraint).
+\end{proof}
+
+\section{Uniqueness under Type Constraints}
+
+\subsection{Equilateral Triangles}
+
+\begin{theorem}[Uniqueness for Equilateral Triangles]
+\label{thm:equilateral-unique}
+If $\tri ABC$ is equilateral with side length $s$, and $P$ is an interior point with vertex distances $(d_1, d_2, d_3)$ satisfying the strict triangle inequality, then $s$ is uniquely determined (up to the constraint that $P$ must be interior).
+
+Specifically, $s$ is the unique positive real root of:
+\begin{equation}
+\label{eq:equilateral-poly}
+3(d_1^4 + d_2^4 + d_3^4 + s^4) = (d_1^2 + d_2^2 + d_3^2 + s^2)^2.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Setting $a = b = c = s$ in the Cayley--Menger determinant $\CM_4 = 0$ and simplifying (see Chapter~\ref{ch:equilateral} for the detailed computation) yields~\eqref{eq:equilateral-poly}. Expanding:
+\begin{equation}
+3d_1^4 + 3d_2^4 + 3d_3^4 + 3s^4 = d_1^4 + d_2^4 + d_3^4 + s^4 + 2(d_1^2 d_2^2 + d_1^2 d_3^2 + d_2^2 d_3^2 + d_1^2 s^2 + d_2^2 s^2 + d_3^2 s^2).
+\end{equation}
+
+Simplifying:
+\begin{equation}
+2(d_1^4 + d_2^4 + d_3^4) + 2s^4 = 2(d_1^2 d_2^2 + d_1^2 d_3^2 + d_2^2 d_3^2) + 2s^2(d_1^2 + d_2^2 + d_3^2).
+\end{equation}
+
+This is a quadratic in $s^2$:
+\begin{equation}
+s^4 - s^2(d_1^2 + d_2^2 + d_3^2) + (d_1^4 + d_2^4 + d_3^4 - d_1^2 d_2^2 - d_1^2 d_3^2 - d_2^2 d_3^2) = 0.
+\end{equation}
+
+By the quadratic formula:
+\begin{equation}
+s^2 = \frac{(d_1^2 + d_2^2 + d_3^2) \pm \sqrt{(d_1^2 + d_2^2 + d_3^2)^2 - 4(d_1^4 + d_2^4 + d_3^4 - d_1^2 d_2^2 - d_1^2 d_3^2 - d_2^2 d_3^2)}}{2}.
+\end{equation}
+
+The discriminant simplifies:
+\begin{align}
+\Delta &= (d_1^2 + d_2^2 + d_3^2)^2 - 4(d_1^4 + d_2^4 + d_3^4) + 4(d_1^2 d_2^2 + d_1^2 d_3^2 + d_2^2 d_3^2) \\
+&= -3(d_1^4 + d_2^4 + d_3^4) + 6(d_1^2 d_2^2 + d_1^2 d_3^2 + d_2^2 d_3^2) \\
+&= 3\left[2(d_1^2 d_2^2 + d_2^2 d_3^2 + d_1^2 d_3^2) - (d_1^4 + d_2^4 + d_3^4)\right].
+\end{align}
+
+By the Schur inequality (or direct verification), $\Delta \geq 0$ when $d_1, d_2, d_3$ satisfy the triangle inequality, with equality iff $d_1 = d_2 = d_3$ (point $P$ at the centroid). The larger root gives $s^2$ (the smaller root corresponds to a configuration where $P$ is exterior or the triangle is degenerate).
+\end{proof}
+
+\subsection{Isosceles Triangles}
+
+\begin{theorem}[Finite Solutions for Isosceles Triangles]
+For an isosceles triangle with $b = c$ and given interior point distances $(d_1, d_2, d_3)$, the VDPP admits at most finitely many solutions (generically, 2 or 4 solutions for the pair $(a, b)$).
+\end{theorem}
+
+\subsection{Right Triangles}
+
+\begin{theorem}[Finite Solutions for Right Triangles]
+For a right triangle with $\hat{C} = \pi/2$ (so $c^2 = a^2 + b^2$) and given interior point distances $(d_1, d_2, d_3)$, the VDPP admits at most finitely many solutions.
+\end{theorem}
+
+\section{Degenerate Configurations}
+
+\begin{definition}[Degenerate Configuration]
+A VDPP configuration is \emph{degenerate} if:
+\begin{enumerate}[label=(\roman*)]
+    \item The triangle $\tri ABC$ degenerates (three collinear points): $\area = 0$.
+    \item The point $P$ lies on an edge of $\tri ABC$: one subtended angle equals $\pi$.
+    \item The point $P$ coincides with a vertex: one distance $d_i = 0$.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Boundary of the Solution Manifold]
+The solution manifold $\mathcal{M}$ has boundary components corresponding to degenerate configurations:
+\begin{enumerate}[label=(\roman*)]
+    \item As $\alpha \to \pi$ (with $\beta + \gamma \to \pi$), the triangle degenerates with $P$ approaching side $BC$.
+    \item As $\alpha \to 0$, the side $a \to \abs{d_2 - d_3}$ and the triangle becomes increasingly elongated.
+    \item At the boundary $\alpha + \beta = \pi$ (i.e., $\gamma \to \pi$), the point $P$ approaches side $AB$.
+\end{enumerate}
+\end{theorem}
+
+\section{Continuity and Compactness}
+
+\begin{theorem}[Compactness of the Perimeter Range]
+\label{thm:compact-perimeter}
+For fixed $(d_1, d_2, d_3) \in \R_{>0}^3$, the closure of the solution manifold $\overline{\mathcal{M}}$ is compact, and the perimeter function $\perim: \overline{\mathcal{M}} \to \R$ attains its maximum and minimum values.
+\end{theorem}
+
+\begin{proof}
+The feasible domain $\overline{\Omega} = \{(\alpha, \beta) : \alpha, \beta \geq 0, \; \alpha + \beta \leq 2\pi, \; \gamma = 2\pi - \alpha - \beta \geq 0\}$ is a compact (closed and bounded) subset of $\R^2$. The perimeter function $\perim$ is continuous on $\overline{\Omega}$. By the extreme value theorem, $\perim$ attains its maximum and minimum on $\overline{\Omega}$.
+\end{proof}

@@ -1,0 +1,186 @@
+% Chapter 7: Pompeiu's Theorem
+% ============================================================
+
+\chapter{Pompeiu's Theorem and Related Results}
+\label{ch:pompeiu}
+
+Pompeiu's theorem is one of the most elegant results connecting vertex distances to triangle geometry. In this chapter, we state and prove the theorem, explore its connection to Van Schooten's theorem, and discuss its implications for the VDPP.
+
+\section{Statement of Pompeiu's Theorem}
+
+\begin{theorem}[Pompeiu's Theorem, 1936]
+\label{thm:pompeiu}
+Let $\tri ABC$ be an equilateral triangle and let $P$ be any point in the plane of $\tri ABC$. Then the three distances $PA$, $PB$, $PC$ satisfy the triangle inequality---that is, they can form the sides of a (possibly degenerate) triangle, called \emph{Pompeiu's triangle}.
+
+Specifically:
+\begin{enumerate}[label=(\roman*)]
+    \item If $P$ does not lie on the circumcircle of $\tri ABC$, then $PA$, $PB$, $PC$ form a \textbf{non-degenerate} triangle.
+    \item If $P$ lies on the circumcircle of $\tri ABC$, then $PA$, $PB$, $PC$ form a \textbf{degenerate} triangle (the longest distance equals the sum of the other two).
+\end{enumerate}
+\end{theorem}
+
+\section{Proof by the 60° Rotation Method}
+
+The most elegant proof uses a rotation by $60°$ around one of the vertices.
+
+\begin{proof}
+Let the equilateral triangle have side length $s$, and let $P$ be a point in the plane with $PA = d_1$, $PB = d_2$, $PC = d_3$.
+
+\textbf{Step 1: Construct the rotation.}
+Let $\mathcal{R}$ denote the rotation by $60°$ counterclockwise about vertex $B$. Under $\mathcal{R}$:
+\begin{itemize}
+    \item Vertex $A$ maps to vertex $C$ (since $\tri ABC$ is equilateral and $\angle ABC = 60°$, $BA = BC = s$, so a $60°$ rotation about $B$ sends $A$ to $C$).
+    \item Point $P$ maps to a new point $P'$.
+\end{itemize}
+
+\textbf{Step 2: Analyze triangle $\tri BPP'$.}
+Since $\mathcal{R}$ is a rotation by $60°$ about $B$:
+\begin{itemize}
+    \item $BP' = BP = d_2$ (rotations preserve distances from the center).
+    \item $\angle PBP' = 60°$.
+\end{itemize}
+Therefore, $\tri BPP'$ is an \textbf{isosceles triangle} with $BP = BP' = d_2$ and $\angle PBP' = 60°$, which makes it \textbf{equilateral}:
+\begin{equation}
+PP' = BP = d_2.
+\end{equation}
+
+\textbf{Step 3: Analyze triangle $\tri APP'$.}
+Since the rotation $\mathcal{R}$ sends $A \to C$ and $P \to P'$:
+\begin{itemize}
+    \item $AP' = CP = d_3$ (the rotation preserves the distance $AP$, but maps $A \to C$, so $CP' = AP$... wait, let us be more careful).
+\end{itemize}
+
+Actually, since $\mathcal{R}$ maps $A \to C$, we have:
+\begin{equation}
+P'C = PA = d_1,
+\end{equation}
+because the rotation preserves distances: $\abs{\mathcal{R}(P) - \mathcal{R}(A)} = \abs{P - A}$, so $\abs{P' - C} = \abs{P - A} = d_1$.
+
+\textbf{Step 4: Identify Pompeiu's triangle.}
+Now consider triangle $\tri PP'C$:
+\begin{itemize}
+    \item $PP' = d_2$ (from Step 2),
+    \item $P'C = d_1$ (from Step 3),
+    \item $PC = d_3$ (given).
+\end{itemize}
+
+Therefore, $\tri PP'C$ has sides $d_1$, $d_2$, $d_3$---these three distances form a triangle! This is Pompeiu's triangle.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=2]
+    % Equilateral triangle
+    \coordinate (A) at (0, 0);
+    \coordinate (B) at (3, 0);
+    \coordinate (C) at (1.5, 2.598);
+    
+    % Interior point
+    \coordinate (P) at (1.2, 0.9);
+    
+    % Rotated point P' (60 degrees about B)
+    % P relative to B: (-1.8, 0.9)
+    % Rotate 60 CCW: x'=xcos60-ysin60, y'=xsin60+ycos60
+    % x'=-1.8*0.5 - 0.9*0.866 = -0.9 - 0.779 = -1.679
+    % y'=-1.8*0.866 + 0.9*0.5 = -1.559 + 0.45 = -1.109
+    % P' = B + (-1.679, -1.109) ... let's just place it visually
+    \coordinate (P') at (1.77, 2.1);
+    
+    % Fill triangles
+    \fill[blue!8] (A) -- (B) -- (C) -- cycle;
+    \fill[warmred!15] (P) -- (P') -- (C) -- cycle;
+    
+    % Draw equilateral triangle
+    \draw[thick, primaryblue] (A) -- (B) -- (C) -- cycle;
+    
+    % Draw Pompeiu's triangle
+    \draw[thick, warmred, dashed] (P) -- (P') node[midway, left, font=\small] {$d_2$};
+    \draw[thick, warmred, dashed] (P') -- (C) node[midway, right, font=\small] {$d_1$};
+    \draw[thick, warmred, dashed] (P) -- (C) node[midway, below right, font=\small] {$d_3$};
+    
+    % Draw distances from P
+    \draw[thin, black!40] (P) -- (A) node[midway, below, font=\scriptsize] {$d_1$};
+    \draw[thin, black!40] (P) -- (B) node[midway, below, font=\scriptsize] {$d_2$};
+    
+    % Draw rotation arc
+    \draw[->, accentcyan, thick] (P) ++(0:0.3) arc (0:55:0.3);
+    \node[accentcyan, font=\scriptsize] at (1.5, 0.8) {$60°$};
+    
+    % Equilateral triangle BPP'
+    \draw[thin, deepgreen, dotted] (B) -- (P') node[midway, right, font=\scriptsize] {$d_2$};
+    
+    % Vertices
+    \fill (A) circle (1.5pt) node[below left] {$A$};
+    \fill (B) circle (1.5pt) node[below right] {$B$};
+    \fill (C) circle (1.5pt) node[above] {$C$};
+    \fill[warmred] (P) circle (1.5pt) node[below] {$P$};
+    \fill[deepgreen] (P') circle (1.5pt) node[above left] {$P'$};
+\end{tikzpicture}
+\caption{Proof of Pompeiu's theorem by $60°$ rotation about $B$. The rotation maps $P \to P'$ and $A \to C$. Triangle $\tri PP'C$ (shaded red) has sides $d_1, d_2, d_3$.}
+\label{fig:pompeiu-proof}
+\end{figure}
+
+\textbf{Step 5: Degeneracy on the circumcircle.}
+If $P$ lies on the circumcircle of $\tri ABC$, then $P$, $P'$, and $C$ become collinear (this can be verified by checking that $\angle PP'C = 180°$ using inscribed angle theorems), so Pompeiu's triangle degenerates. This is Van Schooten's theorem.
+\end{proof}
+
+\section{Van Schooten's Theorem}
+\label{sec:van-schooten}
+
+\begin{theorem}[Van Schooten's Theorem]
+\label{thm:van-schooten}
+Let $\tri ABC$ be an equilateral triangle with circumcircle $\omega$. For any point $P$ on the arc $BC$ of $\omega$ not containing $A$:
+\begin{equation}
+PA = PB + PC.
+\end{equation}
+Analogous relations hold for points on the other arcs.
+\end{theorem}
+
+\begin{proof}
+This is a direct corollary of Ptolemy's theorem applied to the cyclic quadrilateral $ABPC$:
+\begin{equation}
+PA \cdot BC = PB \cdot AC + PC \cdot AB.
+\end{equation}
+Since $\tri ABC$ is equilateral, $AB = BC = AC = s$, so dividing by $s$:
+\begin{equation}
+PA = PB + PC. \qedhere
+\end{equation}
+\end{proof}
+
+\section{Implications for the VDPP}
+
+\subsection{The Equilateral Case}
+
+Pompeiu's theorem has a remarkable consequence for the equilateral case of the VDPP:
+
+\begin{corollary}
+\label{cor:pompeiu-feasibility}
+If $\tri ABC$ is equilateral and $P$ is an interior point, then the vertex distances $d_1, d_2, d_3$ necessarily satisfy the \textbf{strict} triangle inequality:
+\begin{equation}
+d_i + d_j > d_k \quad \text{for all permutations } \{i, j, k\} = \{1, 2, 3\}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Since $P$ is interior to $\tri ABC$, it lies strictly inside the circumcircle (the circumcircle passes through the vertices, and the interior of the triangle is strictly inside the circumcircle for an equilateral triangle). By Pompeiu's theorem, the triangle with sides $d_1, d_2, d_3$ is non-degenerate, hence the strict triangle inequality holds.
+\end{proof}
+
+\subsection{The Pompeiu Triangle as a Diagnostic Tool}
+
+For a general (non-equilateral) triangle, Pompeiu's theorem does not directly apply---the distances $d_1, d_2, d_3$ from an interior point need not form a triangle. However, checking whether they \emph{do} form a triangle provides a diagnostic:
+
+\begin{itemize}
+    \item If $d_1, d_2, d_3$ satisfy the triangle inequality, the original triangle \emph{might} be equilateral (but isn't necessarily).
+    \item If $d_1, d_2, d_3$ violate the triangle inequality, the original triangle is \emph{definitely not} equilateral.
+\end{itemize}
+
+\section{Generalization: Pompeiu's Theorem for Non-Equilateral Triangles}
+
+For a general triangle $\tri ABC$, the vertex distances $d_1 = PA$, $d_2 = PB$, $d_3 = PC$ satisfy a more general inequality. Using the area decomposition~\eqref{eq:area-total} and the constraint that $\area > 0$:
+
+\begin{proposition}[Generalized Pompeiu Inequality]
+For any interior point $P$ of a non-degenerate triangle $\tri ABC$:
+\begin{equation}
+d_2 d_3 + d_1 d_3 + d_1 d_2 > 2\area,
+\end{equation}
+where $\area$ is the area of $\tri ABC$. Equality holds only in degenerate limits.
+\end{proposition}

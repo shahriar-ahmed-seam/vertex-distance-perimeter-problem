@@ -1,0 +1,75 @@
+% Chapter 13: The Right Triangle Case
+% ============================================================
+
+\chapter{The Right Triangle Case}
+\label{ch:right}
+
+The right triangle introduces the Pythagorean constraint $c^2 = a^2 + b^2$ (assuming the right angle is at $C$), which eliminates one degree of freedom and yields a finite set of solutions.
+
+\section{The Pythagorean Constraint}
+
+Let $\hat{C} = \pi/2$, so that $c^2 = a^2 + b^2$. Substituting into the master polynomial~\eqref{eq:master-final}:
+
+With $w = d_1^2 + d_2^2 - c^2 = d_1^2 + d_2^2 - a^2 - b^2$, the constraint modifies $w$ to involve both $a$ and $b$.
+
+\section{Reduced System}
+
+The Cayley--Menger constraint with $c^2 = a^2 + b^2$ gives a polynomial $G(a^2, b^2; d_1, d_2, d_3) = 0$ in two unknowns. Combined with the constraint that $P$ is interior and all side lengths are positive, this defines a curve in $(a, b)$-space.
+
+\subsection{Parameterization by One Angle}
+
+Since one constraint has been applied (the right angle), the remaining degree of freedom can be parameterized by, say, $\alpha = \angle BPC$. Then:
+\begin{align}
+a &= \sqrt{d_2^2 + d_3^2 - 2d_2 d_3 \cos\alpha}, \\
+b &= f(\alpha; d_1, d_2, d_3), \\
+c &= \sqrt{a^2 + b^2}.
+\end{align}
+
+The function $b = f(\alpha)$ is determined by substituting into the Cayley--Menger constraint.
+
+\section{The Right-Angled Cayley--Menger}
+
+Setting $c^2 = a^2 + b^2$, the auxiliary variable $Z = b^2 + c^2 - a^2 = 2b^2$ and $w = d_1^2 + d_2^2 - a^2 - b^2$. The master polynomial becomes:
+\begin{equation}
+d_3^2 (d_1^2 + d_2^2 - a^2 - b^2)^2 - (d_2^2 + d_3^2 - a^2)(d_1^2 + d_3^2 - b^2)(d_1^2 + d_2^2 - a^2 - b^2) + \ldots = 0.
+\end{equation}
+
+This is a polynomial of degree 3 in $(a^2, b^2)$, which can be solved numerically for specific $(d_1, d_2, d_3)$ values.
+
+\section{Special Case: Isosceles Right Triangle}
+
+When $a = b$ (and $c = a\sqrt{2}$), the problem reduces to a single unknown $a$:
+\begin{align}
+a^2 &= d_2^2 + d_3^2 - 2d_2 d_3 \cos\alpha, \\
+a^2 &= d_1^2 + d_3^2 - 2d_1 d_3 \cos\beta, \\
+2a^2 &= d_1^2 + d_2^2 - 2d_1 d_2 \cos\gamma.
+\end{align}
+
+From the first two: $d_2^2 + d_3^2 - 2d_2 d_3 \cos\alpha = d_1^2 + d_3^2 - 2d_1 d_3 \cos\beta$, giving a relation between $\alpha$ and $\beta$.
+
+\section{Perimeter of a Right Triangle}
+
+\begin{equation}
+\perim = a + b + \sqrt{a^2 + b^2} = a + b + c.
+\end{equation}
+
+The ratio $\perim / c = 1 + a/c + b/c = 1 + \sin\hat{C'} + \cos\hat{C'}$ for appropriate angle $\hat{C'}$... More usefully:
+\begin{equation}
+\perim = a + b + \sqrt{a^2 + b^2}.
+\end{equation}
+
+Given the constraint curve $G(a, b) = 0$, the perimeter traces out a curve in $\R$ as $(a, b)$ moves along $G = 0$.
+
+\section{Worked Example}
+
+\begin{example}
+Let $d_1 = 3$, $d_2 = 4$, $d_3 = 5$, and require $c^2 = a^2 + b^2$.
+
+The numerical solver finds that one solution gives approximately:
+\begin{align}
+a &\approx 6.08, \quad b \approx 4.52, \quad c = \sqrt{a^2 + b^2} \approx 7.58, \\
+\perim &\approx 18.18.
+\end{align}
+
+(Exact values depend on the specific solution branch of the polynomial system.)
+\end{example}

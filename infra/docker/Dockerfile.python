@@ -1,0 +1,7 @@
+FROM python:3.12-slim
+WORKDIR /app
+COPY engines/python/pyproject.toml .
+RUN pip install --no-cache-dir sympy scipy numpy matplotlib pytest
+COPY engines/python /app/engines/python
+COPY data /app/data
+CMD ["pytest", "engines/python/tests"]

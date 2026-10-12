@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production builds
+dist/
+dist-ssr/
+*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# Go
+bin/
+*.exe
+*.test
+*.prof
+
+# Rust
+target/
+Cargo.lock
+
+# Logs & temp
+*.log
+.DS_Store

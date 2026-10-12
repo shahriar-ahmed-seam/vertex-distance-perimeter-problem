@@ -1,0 +1,22 @@
+% Chapter 1: Abstract
+% ============================================================
+% (This file is included via \input in the abstract environment of main.tex)
+
+We introduce and systematically study the \emph{Vertex-Distance Perimeter Problem}: given a triangle $\tri ABC$ in the Euclidean plane and an arbitrary interior point $P$, with known Euclidean distances $d_1 = PA$, $d_2 = PB$, and $d_3 = PC$ to the three vertices, determine the perimeter $\perim = a + b + c$ of the triangle, where $a$, $b$, $c$ denote the side lengths opposite vertices $A$, $B$, $C$ respectively.
+
+We establish through rigorous degrees-of-freedom analysis that the problem, as stated, is \emph{fundamentally underdetermined}: a triangle possesses three intrinsic shape parameters (its side lengths), while an interior point contributes two additional positional degrees of freedom, yielding a system with five unknowns constrained by only three measurements. The resulting solution space forms a \emph{one-dimensional manifold} of geometrically distinct triangles after quotienting by the Euclidean group, parameterizable by a single angular parameter at the interior point.
+
+The central mathematical apparatus is the \emph{Cayley--Menger determinant}, a $(n+2) \times (n+2)$ bordered symmetric matrix whose vanishing characterizes the realizability of $n+1$ points in $\R^{n-1}$. Applied to our four coplanar points $(A, B, C, P)$, the $5 \times 5$ Cayley--Menger determinant yields a polynomial constraint linking all six pairwise distances. We derive this constraint explicitly and analyze the resulting algebraic variety.
+
+For constrained triangle classes, the problem admits finite or unique solutions. We derive closed-form solutions for equilateral triangles (via the identity $3(x^4 + y^4 + z^4 + s^4) = (x^2 + y^2 + z^2 + s^2)^2$), specialized formulas for isosceles and right triangles, and classification criteria for acute and obtuse configurations. We prove Pompeiu's theorem as a structural result connecting our framework to classical triangle geometry, and establish connections to Stewart's theorem and the Leibniz distance formula.
+
+We present five distinct computational approaches---symbolic algebraic solving, Newton--Raphson iteration, gradient descent optimization, the Nelder--Mead simplex method, and hybrid bisection--secant root-finding---implemented across four programming languages (Python, TypeScript, Go, and Rust/WebAssembly). A synthetic dataset of $10^6$ solved triangle configurations supports extensive benchmarking of solver accuracy, convergence rates, and computational performance.
+
+The theory is extended to non-Euclidean geometries: spherical triangles on $S^2$ via the spherical law of cosines and great-circle distances, and hyperbolic triangles in the Poincar\'e disk model via the hyperbolic metric. A three-dimensional generalization to tetrahedra is formulated using the $6 \times 6$ Cayley--Menger determinant.
+
+An interactive web application provides real-time geometric exploration, solver visualization, error landscape rendering, and step-by-step proof walkthroughs.
+
+\medskip
+\noindent\textbf{Keywords:} Triangle reconstruction, vertex distances, interior point, Cayley--Menger determinant, Pompeiu's theorem, distance geometry, solution manifold, computational geometry, non-Euclidean geometry.
+
+\noindent\textbf{MSC 2020:} 51M04, 52B11, 51K05, 65H10, 68U05.

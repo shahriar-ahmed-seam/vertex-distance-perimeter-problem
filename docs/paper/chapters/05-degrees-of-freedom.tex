@@ -1,0 +1,226 @@
+% Chapter 5: Degrees of Freedom Analysis
+% ============================================================
+
+\chapter{Degrees of Freedom Analysis}
+\label{ch:dof}
+
+This chapter provides a rigorous analysis of why the Vertex-Distance Perimeter Problem is underdetermined, quantifying the precise deficit of information and characterizing the resulting solution manifold.
+
+\section{Counting Degrees of Freedom}
+
+\subsection{The Triangle}
+
+A triangle in $\R^2$ is determined by the coordinates of its three vertices:
+\begin{equation}
+A = (x_A, y_A), \quad B = (x_B, y_B), \quad C = (x_C, y_C).
+\end{equation}
+This gives $3 \times 2 = 6$ real parameters. However, the \emph{shape} and \emph{size} of the triangle are invariant under rigid Euclidean motions (translations and rotations), which form a 3-parameter group:
+\begin{itemize}
+    \item Translation: 2 parameters $(t_x, t_y)$,
+    \item Rotation: 1 parameter $\theta$.
+\end{itemize}
+
+We exclude reflections since we fix the orientation (counterclockwise). Thus the \emph{intrinsic} degrees of freedom of a triangle are:
+\begin{equation}
+\text{DoF}_{\text{triangle}} = 6 - 3 = 3.
+\end{equation}
+
+These three intrinsic parameters can be represented as:
+\begin{itemize}
+    \item The three side lengths $(a, b, c)$; or
+    \item Two angles and one side length; or
+    \item Any other triple of independent geometric invariants.
+\end{itemize}
+
+\subsection{The Interior Point}
+
+An interior point $P$ in the plane of the triangle introduces:
+\begin{equation}
+\text{DoF}_{\text{point}} = 2 \quad \text{(coordinates $(x_P, y_P)$ relative to the triangle)}.
+\end{equation}
+
+Note that $P$'s position is measured \emph{relative to the triangle}, so the Euclidean symmetry has already been factored out.
+
+\subsection{Total System}
+
+The total number of intrinsic degrees of freedom for the configuration $(\tri ABC, P)$ is:
+\begin{equation}
+\text{DoF}_{\text{total}} = \text{DoF}_{\text{triangle}} + \text{DoF}_{\text{point}} = 3 + 2 = 5.
+\end{equation}
+
+\subsection{Available Measurements}
+
+The VDPP provides three measurements: $d_1 = PA$, $d_2 = PB$, $d_3 = PC$. Each measurement imposes one scalar constraint, for a total of:
+\begin{equation}
+\text{Constraints} = 3.
+\end{equation}
+
+\subsection{The Deficit}
+
+\begin{theorem}[Underdeterminacy of the VDPP]
+\label{thm:underdetermined}
+The Vertex-Distance Perimeter Problem has a measurement deficit of:
+\begin{equation}
+\boxed{\text{Deficit} = \text{DoF}_{\text{total}} - \text{Constraints} = 5 - 3 = 2.}
+\end{equation}
+The solution space is generically a $2$-dimensional manifold in the space of configurations.
+\end{theorem}
+
+\begin{remark}
+After fixing the rotational ambiguity of the coordinate system (e.g., placing $A$ on the positive $x$-axis from $P$), one degree of freedom is consumed, reducing the effective deficit to $\mathbf{1}$. The solution space then becomes a \emph{one-dimensional curve}---the solution manifold $\mathcal{M}$ introduced in Definition~\ref{def:solution-manifold}.
+\end{remark}
+
+\section{Geometric Interpretation}
+
+\subsection{Circles of Constraint}
+
+Each vertex distance $d_i$ constrains the corresponding vertex to lie on a circle of radius $d_i$ centered at $P$:
+\begin{align}
+A &\in S^1(P, d_1) = \{Q \in \R^2 : \abs{PQ} = d_1\}, \\
+B &\in S^1(P, d_2), \\
+C &\in S^1(P, d_3).
+\end{align}
+
+Each circle is one-dimensional (parameterized by a single angle), so the three vertices collectively have $1 + 1 + 1 = 3$ angular degrees of freedom $(\theta_1, \theta_2, \theta_3)$ on their respective circles.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=1.5]
+    % Point P
+    \coordinate (P) at (0, 0);
+    \fill[warmred] (P) circle (1.5pt) node[below] {$P$};
+
+    % Circles
+    \draw[primaryblue, thick, dashed] (P) circle (1.2);
+    \draw[deepgreen, thick, dashed] (P) circle (1.8);
+    \draw[goldaccent, thick, dashed] (P) circle (2.3);
+
+    % Labels
+    \node[primaryblue, font=\small] at (0.85, 0.85) {$d_1$};
+    \node[deepgreen, font=\small] at (1.27, 1.27) {$d_2$};
+    \node[goldaccent, font=\small] at (1.63, 1.63) {$d_3$};
+
+    % Sample vertices
+    \coordinate (A) at (1.2, 0);
+    \coordinate (B) at (-0.9, 1.56);
+    \coordinate (C) at (-1.5, -1.74);
+
+    \fill[primaryblue] (A) circle (2pt) node[right] {$A$};
+    \fill[deepgreen] (B) circle (2pt) node[above left] {$B$};
+    \fill[goldaccent] (C) circle (2pt) node[below left] {$C$};
+
+    % Triangle
+    \draw[thick, black!60] (A) -- (B) -- (C) -- cycle;
+
+    % Distances
+    \draw[primaryblue, thick] (P) -- (A);
+    \draw[deepgreen, thick] (P) -- (B);
+    \draw[goldaccent, thick] (P) -- (C);
+\end{tikzpicture}
+\caption{The three constraint circles centered at $P$. Vertex $A$ may be placed anywhere on the blue circle (radius $d_1$), $B$ anywhere on the green circle (radius $d_2$), and $C$ anywhere on the gold circle (radius $d_3$). Different angular placements yield different triangles.}
+\label{fig:constraint-circles}
+\end{figure}
+
+\subsection{Reducing by Symmetry}
+
+Setting $\theta_1 = 0$ (fixing the rotation) leaves two free angular parameters $(\theta_2, \theta_3)$. The angular constraint $\alpha + \beta + \gamma = 2\pi$ is automatically satisfied by construction (the angles at $P$ within the sub-triangles always sum to $2\pi$), but the requirement that $P$ be \emph{interior} to $\tri ABC$ imposes the constraint:
+\begin{equation}
+\label{eq:interior-constraint}
+0 < \theta_2 < \theta_3 < 2\pi \quad \text{(assuming CCW ordering $A, B, C$).}
+\end{equation}
+
+Within this ordering constraint, any choice of $(\theta_2, \theta_3)$ in a suitable open subset of $(0, 2\pi)^2$ yields a valid VDPP configuration. The resulting \emph{two-dimensional} family parameterizes all triangles compatible with the given distances.
+
+\subsection{From Two Dimensions to One}
+
+To reduce to a one-dimensional manifold in the space of \emph{triangle shapes} $(a, b, c)$, observe that different angular pairs $(\theta_2, \theta_3)$ can yield the same triangle shape (up to similarity or congruence). However, for our problem, we seek not just the shape but the actual triangle, so the relevant parameter space is:
+\begin{equation}
+\mathcal{M} = \left\{(\alpha, \beta) \in (0, \pi) \times (0, \pi) : \alpha + \beta < 2\pi, \; 2\pi - \alpha - \beta < \pi \right\},
+\end{equation}
+which, via the constraint $\alpha + \beta + \gamma = 2\pi$, is equivalent to:
+\begin{equation}
+\Omega = \left\{(\alpha, \beta) : \alpha, \beta \in (0, \pi), \; \alpha + \beta > \pi \right\}.
+\end{equation}
+
+This is a \emph{two-dimensional} open region in the $(\alpha, \beta)$-plane. The perimeter $\perim(\alpha, \beta)$ varies continuously over $\Omega$, sweeping out an interval.
+
+\section{The Perimeter Landscape}
+
+\begin{definition}[Perimeter Function]
+The \emph{perimeter function} $\perim: \Omega \to \R_{>0}$ is defined by:
+\begin{equation}
+\perim(\alpha, \beta) = a(\alpha) + b(\beta) + c(2\pi - \alpha - \beta),
+\end{equation}
+where $a$, $b$, $c$ are given by Equations~\eqref{eq:side-a-formal}--\eqref{eq:side-c-formal}.
+\end{definition}
+
+\begin{theorem}[Smoothness of the Perimeter Function]
+The perimeter function $\perim: \Omega \to \R_{>0}$ is infinitely differentiable ($C^\infty$) on the interior of $\Omega$.
+\end{theorem}
+
+\begin{proof}
+Each side-length function $a(\alpha) = \sqrt{d_2^2 + d_3^2 - 2d_2 d_3 \cos\alpha}$ is $C^\infty$ on $(0, \pi)$, since the expression under the square root is strictly positive for $\alpha \in (0, \pi)$:
+\[
+d_2^2 + d_3^2 - 2d_2 d_3 \cos\alpha \geq (d_2 - d_3)^2 + 2d_2 d_3 (1 - \cos\alpha) > 0.
+\]
+Similarly for $b(\beta)$ and $c(\gamma)$. The sum of $C^\infty$ functions is $C^\infty$.
+\end{proof}
+
+\section{Critical Points and Extremal Triangles}
+
+The extremal perimeters correspond to critical points of $\perim$ on $\Omega$ or to boundary behavior as $(\alpha, \beta) \to \partial\Omega$.
+
+\begin{proposition}[Gradient of the Perimeter]
+The partial derivatives of $\perim$ with respect to $\alpha$ and $\beta$ are:
+\begin{align}
+\frac{\partial \perim}{\partial \alpha} &= \frac{d_2 d_3 \sin\alpha}{a(\alpha)} - \frac{d_1 d_2 \sin\gamma}{c(\gamma)}, \label{eq:dP-dalpha} \\
+\frac{\partial \perim}{\partial \beta} &= \frac{d_1 d_3 \sin\beta}{b(\beta)} - \frac{d_1 d_2 \sin\gamma}{c(\gamma)}. \label{eq:dP-dbeta}
+\end{align}
+\end{proposition}
+
+Setting both partial derivatives to zero yields the critical point equations:
+\begin{equation}
+\label{eq:critical-point}
+\frac{d_2 d_3 \sin\alpha}{a} = \frac{d_1 d_3 \sin\beta}{b} = \frac{d_1 d_2 \sin\gamma}{c}.
+\end{equation}
+
+\begin{remark}
+By the law of sines applied to the sub-triangles, the critical point condition~\eqref{eq:critical-point} can be interpreted geometrically: the perimeter is stationary when the three sub-triangles $\tri BPC$, $\tri APC$, $\tri APB$ satisfy a particular proportionality relation involving their altitudes from $P$.
+\end{remark}
+
+\section{Additional Constraints to Resolve Underdeterminacy}
+
+To make the VDPP uniquely solvable, we need additional information equivalent to two scalar constraints (or one, after fixing the rotation). Common choices include:
+
+\begin{enumerate}
+    \item \textbf{Triangle type constraint.} Specifying that the triangle is equilateral reduces $\text{DoF}_{\text{triangle}}$ from 3 to 1 (the side length $s$), making the system overdetermined (1 + 2 = 3 unknowns, 3 measurements).
+
+    \item \textbf{One angle at $P$.} Knowing one of $\alpha$, $\beta$, or $\gamma$ fixes the problem to a one-dimensional manifold; knowing two angles (and hence all three via $\alpha + \beta + \gamma = 2\pi$) uniquely determines the triangle.
+
+    \item \textbf{One side length.} Knowing any one side length $a$, $b$, or $c$ provides one additional constraint, reducing the deficit to 1.
+
+    \item \textbf{Position of $P$.} Knowing that $P$ is a specific triangle center (centroid, incenter, circumcenter, orthocenter) imposes 2 algebraic constraints on the relationship between $(d_1, d_2, d_3)$ and $(a, b, c)$, potentially making the system determined.
+
+    \item \textbf{Distances to sides.} Knowing the perpendicular distances from $P$ to the three sides provides three additional constraints, making the system highly overdetermined.
+\end{enumerate}
+
+\begin{table}[h!]
+\centering
+\caption{Effect of additional constraints on the solvability of the VDPP.}
+\label{tab:constraints}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Additional Information} & \textbf{Extra Constraints} & \textbf{Remaining DoF} \\
+\midrule
+None (general triangle, general point) & 0 & 2 \\
+Fix rotation ($\theta_1 = 0$) & 1 & 1 \\
+Equilateral triangle ($a = b = c$) & 2 & 0 (determined) \\
+Isosceles ($a = b$ or similar) & 1 & 1 \\
+Right angle ($\hat{C} = \pi/2$) & 1 & 1 \\
+One angle at $P$ known & 1 & 1 \\
+Two angles at $P$ known & 2 & 0 (determined) \\
+$P$ is centroid & 2 & 0 (determined) \\
+$P$ is incenter & 2 & 0 (determined) \\
+\bottomrule
+\end{tabular}
+\end{table}

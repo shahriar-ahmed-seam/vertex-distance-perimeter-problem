@@ -1,0 +1,44 @@
+% Chapter 17: Hyperbolic Geometry Extension
+\chapter{Hyperbolic Geometry Extension}
+\label{ch:hyperbolic}
+
+\section{The Poincar\'e Disk Model}
+The hyperbolic plane $\mathbb{H}^2$ can be modeled by the open unit disk $\mathbb{D} = \{z \in \mathbb{C} : |z| < 1\}$ with the Poincar\'e metric:
+\begin{equation}
+ds^2 = \frac{4(dx^2 + dy^2)}{(1 - x^2 - y^2)^2}.
+\end{equation}
+The hyperbolic distance between points $z_1, z_2 \in \mathbb{D}$ is:
+\begin{equation}
+d_{\mathbb{H}}(z_1, z_2) = \operatorname{arccosh}\left(1 + \frac{2|z_1 - z_2|^2}{(1-|z_1|^2)(1-|z_2|^2)}\right).
+\end{equation}
+
+\section{Hyperbolic Triangle and Interior Point}
+A hyperbolic triangle $\tri ABC$ has vertices in $\mathbb{D}$ and sides that are arcs of geodesics (circles orthogonal to $\partial\mathbb{D}$). The VDPP generalizes directly:
+\begin{itemize}
+    \item The hyperbolic distances from an interior point $P$ to the vertices are $\delta_1, \delta_2, \delta_3$.
+    \item The side lengths $a, b, c$ are hyperbolic distances between vertices.
+    \item The perimeter is $\perim_{\mathbb{H}} = a + b + c$.
+\end{itemize}
+
+\section{The Hyperbolic Law of Cosines}
+\begin{equation}
+\cosh a = \cosh\delta_2\cosh\delta_3 - \sinh\delta_2\sinh\delta_3\cos\alpha,
+\end{equation}
+where $\alpha = \angle BPC$. Note the sign difference from the spherical case.
+
+\section{Hyperbolic Cayley--Menger}
+The Cayley--Menger framework in hyperbolic geometry uses the \emph{Lorentzian Gram matrix}. In the hyperboloid model $\mathbb{H}^2 \subset \R^{2,1}$ (Minkowski space), the hyperbolic cosine of the distance is:
+\begin{equation}
+\cosh d_{\mathbb{H}}(P_i, P_j) = -\langle P_i, P_j \rangle_{\text{Mink}},
+\end{equation}
+and the Gram matrix $G_{ij} = -\cosh d_{ij}$ replaces the Euclidean version.
+
+\section{Angle Deficit and Area}
+A distinctive feature of hyperbolic geometry is that the area of a triangle is determined by its angles:
+\begin{equation}
+\area_{\mathbb{H}} = \pi - \hat{A} - \hat{B} - \hat{C} > 0,
+\end{equation}
+providing an additional constraint not present in Euclidean geometry.
+
+\section{Implementation}
+The hyperbolic solver uses the substitution $\cosh d = (e^d + e^{-d})/2$ to convert to exponential form, then applies numerical root-finding in the same framework as the Euclidean solvers.

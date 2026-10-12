@@ -1,0 +1,103 @@
+% Chapter 19: Numerical Methods and Algorithms
+\chapter{Numerical Methods and Algorithmic Solvers}
+\label{ch:numerical-methods}
+
+\section{Introduction to Computational Formulations}
+While analytical equations provide rigorous algebraic foundations, practical recovery of triangle perimeters from distance triplets $(d_1, d_2, d_3)$ frequently demands high-precision numerical computation. Because the unconstrained system possesses a one-dimensional continuous manifold of solutions (modulo Euclidean isometry), numerical methods either:
+\begin{enumerate}
+    \item Sample and traverse the continuous solution manifold $\mathcal{M}(d_1, d_2, d_3)$ by stepping along a parameterized family (e.g., varying the subtended angle $\alpha = \angle APB$), or
+    \item Solve for isolated points when an auxiliary constraint $g(a,b,c,\theta) = 0$ (such as an aspect ratio, triangle type, or perimeter extremization) is imposed.
+\end{enumerate}
+
+In this chapter, we develop four canonical numerical architectures: Multidimensional Newton--Raphson, Gradient Descent with Momentum/Adam, Nelder--Mead Simplex Optimization, and Bisection-Secant Root Traversal.
+
+\section{Multidimensional Newton--Raphson Formulation}
+\subsection{Polar Angle Parameterization}
+Let the interior point $P$ be situated at the origin $(0,0)$. We assign the vertices polar coordinates:
+\begin{align}
+A &= (d_1 \cos \theta_1, d_1 \sin \theta_1), \\
+B &= (d_2 \cos \theta_2, d_2 \sin \theta_2), \\
+C &= (d_3 \cos \theta_3, d_3 \sin \theta_3).
+\end{align}
+By rotational gauge invariance, we fix $\theta_1 = 0$. The interior point condition implies the angular separations satisfy:
+\begin{equation}
+\alpha = \theta_2 \in (0, \pi), \quad \beta = \theta_3 - \theta_2 \in (0, \pi), \quad \gamma = 2\pi - (\alpha + \beta) \in (0, \pi).
+\end{equation}
+The side lengths squared are governed by the law of cosines:
+\begin{align}
+c^2 &= d_1^2 + d_2^2 - 2d_1 d_2 \cos \alpha, \\
+a^2 &= d_2^2 + d_3^2 - 2d_2 d_3 \cos \beta, \\
+b^2 &= d_3^2 + d_1^2 - 2d_3 d_1 \cos(\alpha + \beta).
+\end{align}
+
+When an auxiliary target constraint is imposed—such as seeking an equilateral triangle where $F_1(\alpha, \beta) = a^2 - b^2 = 0$ and $F_2(\alpha, \beta) = b^2 - c^2 = 0$—we obtain a vector system:
+\begin{equation}
+\mathbf{F}(\mathbf{x}) = \begin{pmatrix} F_1(\alpha, \beta) \\ F_2(\alpha, \beta) \end{pmatrix} = \mathbf{0}, \quad \mathbf{x} = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}.
+\end{equation}
+
+\subsection{Jacobian Matrix Derivation}
+The Newton update step is:
+\begin{equation}
+\mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} - \mathbf{J}^{-1}(\mathbf{x}^{(k)}) \mathbf{F}(\mathbf{x}^{(k)}),
+\end{equation}
+where the Jacobian matrix $\mathbf{J} \in \R^{2 \times 2}$ is given by:
+\begin{equation}
+\mathbf{J} = \begin{pmatrix}
+\frac{\partial F_1}{\partial \alpha} & \frac{\partial F_1}{\partial \beta} \\
+\frac{\partial F_2}{\partial \alpha} & \frac{\partial F_2}{\partial \beta}
+\end{pmatrix}.
+\end{equation}
+For $F_1(\alpha, \beta) = a^2 - b^2$ and $F_2(\alpha, \beta) = b^2 - c^2$:
+\begin{align}
+\frac{\partial F_1}{\partial \alpha} &= -2 d_3 d_1 \sin(\alpha + \beta), \\
+\frac{\partial F_1}{\partial \beta} &= 2 d_2 d_3 \sin \beta - 2 d_3 d_1 \sin(\alpha + \beta), \\
+\frac{\partial F_2}{\partial \alpha} &= 2 d_1 d_2 \sin \alpha + 2 d_3 d_1 \sin(\alpha + \beta), \\
+\frac{\partial F_2}{\partial \beta} &= 2 d_3 d_1 \sin(\alpha + \beta).
+\end{align}
+When $\det(\mathbf{J}) \neq 0$, quadratic local convergence is guaranteed by Kantorovich's theorem. Damped Newton steps with line search safeguard against overshoot outside the interior domain $\alpha + \beta < 2\pi$.
+
+\section{Nonlinear Least-Squares and Gradient Descent}
+When reconstructed from noisy physical sensors (such as GPS, acoustic trilateration, or radio beacon ranging), the measured distances $(\tilde{d}_1, \tilde{d}_2, \tilde{d}_3)$ may contain perturbations. We formulate the reconstruction as an unconstrained or penalty-based optimization problem over vertex coordinates $\mathbf{V} = (A, B, C) \in \R^6$:
+\begin{equation}
+\mathcal{L}(\mathbf{V}; P) = \frac{1}{2} \sum_{i=1}^3 \left( \|V_i - P\|_2 - d_i \right)^2 + \lambda_{\text{type}} \mathcal{R}(\mathbf{V}),
+\end{equation}
+where $\mathcal{R}(\mathbf{V})$ regularizes toward desired geometric priors.
+
+\subsection{Gradient Calculation}
+With respect to vertex position $V_i = (x_i, y_i)$, the gradient is:
+\begin{equation}
+\nabla_{V_i} \mathcal{L} = \left( 1 - \frac{d_i}{\|V_i - P\|_2} \right) (V_i - P).
+\end{equation}
+This reveals an intuitive physical interpretation: each vertex experiences a virtual spring force pulling or pushing radially along the ray connecting $P$ and $V_i$.
+
+\subsection{Adaptive Optimization (Adam)}
+For complex landscapes with elongated valleys along the manifold, standard SGD suffers from slow oscillation. We implement the Adam optimizer:
+\begin{align}
+m_t &= \beta_1 m_{t-1} + (1 - \beta_1) g_t, \\
+v_t &= \beta_2 v_{t-1} + (1 - \beta_2) g_t^2, \\
+\hat{m}_t &= \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t}, \\
+\theta_t &= \theta_{t-1} - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t,
+\end{align}
+with default hyperparameters $\eta = 0.01, \beta_1 = 0.9, \beta_2 = 0.999, \epsilon = 10^{-8}$.
+
+\section{Nelder--Mead Simplex Optimization}
+For objective functions where analytic Jacobians are difficult to compute—such as non-differentiable shape penalties or black-box geometric constraints—the Nelder--Mead simplex method in $n$ dimensions provides robust derivative-free convergence.
+
+For a 2D parameter space $\mathbf{x} = (\alpha, \beta)$, the simplex consists of 3 vertices $\{\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3\}$ ordered such that $f(\mathbf{x}_1) \le f(\mathbf{x}_2) \le f(\mathbf{x}_3)$. At each iteration, the standard operations are applied:
+\begin{enumerate}
+    \item \textbf{Reflection:} $\mathbf{x}_r = \bar{\mathbf{x}} + \alpha_{\text{NM}} (\bar{\mathbf{x}} - \mathbf{x}_3)$ with centroid $\bar{\mathbf{x}} = \frac{1}{2}(\mathbf{x}_1 + \mathbf{x}_2)$.
+    \item \textbf{Expansion:} If $f(\mathbf{x}_r) < f(\mathbf{x}_1)$, compute $\mathbf{x}_e = \bar{\mathbf{x}} + \gamma_{\text{NM}} (\mathbf{x}_r - \bar{\mathbf{x}})$.
+    \item \textbf{Contraction:} If $f(\mathbf{x}_r) \ge f(\mathbf{x}_2)$, compute outside or inside contraction.
+    \item \textbf{Shrink:} If contraction fails, shrink toward the best vertex $\mathbf{x}_1$.
+\end{enumerate}
+Standard Nelder--Mead constants $(\alpha_{\text{NM}}=1, \gamma_{\text{NM}}=2, \rho_{\text{NM}}=0.5, \sigma_{\text{NM}}=0.5)$ yield stable convergence on smooth unimodal cross-sections.
+
+\section{Bisection and Secant 1D Manifold Traversal}
+To trace the continuous 1D family of perimeter values $\mathcal{P}(\alpha)$, we let $\alpha \in (\alpha_{\min}, \alpha_{\max})$ vary continuously. For each candidate $\alpha$:
+\begin{enumerate}
+    \item The side $c(\alpha) = \sqrt{d_1^2 + d_2^2 - 2d_1 d_2 \cos \alpha}$ is uniquely determined.
+    \item The triangle inequality for sides $a, b, c$ imposes tight bounds on $\beta$.
+    \item The root of target shape functions (e.g., isosceles condition $a(\alpha, \beta) = b(\alpha, \beta)$) is bracketed in $[0, 2\pi - \alpha]$ and extracted via hybrid bisection-secant root finding to machine precision ($10^{-14}$).
+\end{enumerate}
+
+This decomposition provides unconditional global convergence for univariate slices across the solution manifold.

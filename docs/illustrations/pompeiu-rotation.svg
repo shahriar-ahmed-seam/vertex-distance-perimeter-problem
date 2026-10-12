@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="pompeiuBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e1e38" />
+    </linearGradient>
+    <filter id="glowGreen" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="600" rx="16" fill="url(#pompeiuBg)" />
+  <rect width="796" height="596" x="2" y="2" rx="14" fill="none" stroke="#10b981" stroke-width="1" stroke-opacity="0.3" />
+
+  <text x="400" y="45" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#f8fafc" text-anchor="middle">
+    POMPEIU'S THEOREM VIA 60° ROTATION
+  </text>
+  <text x="400" y="75" font-family="system-ui, sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">
+    Rotating △ABP by 60° around A maps B to C and forms Pompeiu's Triangle △P P' C
+  </text>
+
+  <!-- Triangle ABC (Equilateral): A(400, 110), B(175, 500), C(625, 500) -->
+  <polygon points="400,110 175,500 625,500" fill="#1e293b" fill-opacity="0.5" stroke="#38bdf8" stroke-width="2.5" />
+
+  <!-- Point P(350, 390) -->
+  <!-- Rotated P' around A(400, 110) by 60°:
+       (Px - Ax)*cos(60) - (Py - Ay)*sin(60) + Ax
+       (-50)*0.5 - (280)*sqrt(3)/2 + 400 = -25 - 242.49 + 400 = 132.51 ... wait, clockwise or counterclockwise:
+       A is (400, 110). B(175, 500) rotates counterclockwise to C? No, C is right, so B to C is counterclockwise from below around A?
+       Let's check: vector AB is (-225, 390). Rotation by -60 deg (clockwise):
+       (-225)*0.5 - (390)*(-sqrt(3)/2) = -112.5 + 337.7 = +225.2.
+       (-225)*(sqrt(3)/2) + 390*(0.5) = -194.8 + 195 = 0.
+       So vector AC = (225, 390).
+       Let's rotate P around A by 60°:
+       P = (350, 380).
+       Vector AP = (-50, 270).
+       Rotated AP': (-50)*0.5 - 270*(-0.866) = -25 + 233.8 = +208.8.
+       (-50)*(0.866) + 270*(0.5) = -43.3 + 135 = 91.7.
+       So P' = A + (209, 230) = (609, 340).
+  -->
+
+  <!-- Rotated Segment AP' -->
+  <line x1="400" y1="110" x2="350" y2="380" stroke="#f43f5e" stroke-width="2" />
+  <line x1="400" y1="110" x2="609" y2="340" stroke="#f43f5e" stroke-width="2" stroke-dasharray="4,4" />
+
+  <!-- Equilateral triangle APP' -->
+  <line x1="350" y1="380" x2="609" y2="340" stroke="#a855f7" stroke-width="2.5" />
+
+  <!-- Rotated triangle AP'C corresponds to APB -->
+  <!-- BP = d2 -->
+  <line x1="175" y1="500" x2="350" y2="380" stroke="#10b981" stroke-width="2.5" />
+  <!-- P'C = PB = d2 -->
+  <line x1="609" y1="340" x2="625" y2="500" stroke="#10b981" stroke-width="2.5" stroke-dasharray="4,4" />
+
+  <!-- PC = d3 -->
+  <line x1="350" y1="380" x2="625" y2="500" stroke="#fbbf24" stroke-width="2.5" />
+
+  <!-- Pompeiu Triangle highlight: PP'C has sides:
+       PP' = d1 (since APP' is equilateral)
+       P'C = d2 (since AP'C is congruent to APB)
+       PC = d3
+  -->
+  <polygon points="350,380 609,340 625,500" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="3" filter="url(#glowGreen)" />
+
+  <!-- Vertices -->
+  <circle cx="400" cy="110" r="7" fill="#38bdf8" />
+  <text x="400" y="90" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#38bdf8" text-anchor="middle">A</text>
+
+  <circle cx="175" cy="500" r="7" fill="#38bdf8" />
+  <text x="155" y="525" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#38bdf8" text-anchor="middle">B</text>
+
+  <circle cx="625" cy="500" r="7" fill="#38bdf8" />
+  <text x="645" y="525" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#38bdf8" text-anchor="middle">C</text>
+
+  <circle cx="350" cy="380" r="8" fill="#e11d48" />
+  <text x="330" y="380" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#fb7185">P</text>
+
+  <circle cx="609" cy="340" r="8" fill="#a855f7" />
+  <text x="630" y="335" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#c084fc">P' (Rotated)</text>
+
+  <!-- Side annotations on Pompeiu Triangle -->
+  <text x="475" y="345" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#c084fc">d₁ (PP')</text>
+  <text x="635" y="420" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#10b981">d₂ (P'C)</text>
+  <text x="470" y="460" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#fbbf24">d₃ (PC)</text>
+
+  <!-- Arc for 60 rotation -->
+  <path d="M 370 200 A 100 100 0 0 1 480 180" fill="none" stroke="#f43f5e" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="440" y="165" font-family="system-ui, sans-serif" font-size="14" fill="#f43f5e">60° rotation</text>
+
+  <!-- Explanation box -->
+  <rect x="80" y="540" width="640" height="40" rx="8" fill="#064e3b" fill-opacity="0.8" stroke="#059669" stroke-width="1" />
+  <text x="400" y="565" font-family="system-ui, sans-serif" font-size="13" fill="#6ee7b7" text-anchor="middle">
+    △P P' C has side lengths d₁, d₂, d₃. Therefore, distances to vertices of an equilateral triangle ALWAYS form a triangle!
+  </text>
+</svg>

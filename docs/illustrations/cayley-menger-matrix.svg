@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="matrixBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" rx="16" fill="url(#matrixBg)" />
+  <rect width="796" height="596" x="2" y="2" rx="14" fill="none" stroke="#6366f1" stroke-width="1" stroke-opacity="0.3" />
+
+  <text x="400" y="45" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#f8fafc" text-anchor="middle">
+    CAYLEY-MENGER BORDERED DETERMINANT (5×5)
+  </text>
+  <text x="400" y="75" font-family="system-ui, sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">
+    Coplanarity Condition for 4 Points: Vertices A, B, C and Interior Point P
+  </text>
+
+  <!-- Big Matrix Container -->
+  <!-- Left Bracket -->
+  <path d="M 120 120 L 90 120 L 90 440 L 120 440" fill="none" stroke="#818cf8" stroke-width="4" stroke-linecap="round" />
+  <!-- Right Bracket -->
+  <path d="M 680 120 L 710 120 L 710 440 L 680 440" fill="none" stroke="#818cf8" stroke-width="4" stroke-linecap="round" />
+
+  <!-- Matrix Grid -->
+  <!-- Headers -->
+  <g font-family="Courier, monospace" font-size="18" font-weight="600" text-anchor="middle">
+    <!-- Row 1 -->
+    <text x="170" y="165" fill="#ef4444">0</text>
+    <text x="280" y="165" fill="#ef4444">1</text>
+    <text x="390" y="165" fill="#ef4444">1</text>
+    <text x="500" y="165" fill="#ef4444">1</text>
+    <text x="610" y="165" fill="#ef4444">1</text>
+
+    <!-- Row 2 -->
+    <text x="170" y="225" fill="#ef4444">1</text>
+    <text x="280" y="225" fill="#64748b">0</text>
+    <text x="390" y="225" fill="#38bdf8">c²</text>
+    <text x="500" y="225" fill="#38bdf8">b²</text>
+    <text x="610" y="225" fill="#f59e0b">d₁²</text>
+
+    <!-- Row 3 -->
+    <text x="170" y="285" fill="#ef4444">1</text>
+    <text x="280" y="285" fill="#38bdf8">c²</text>
+    <text x="390" y="285" fill="#64748b">0</text>
+    <text x="500" y="285" fill="#38bdf8">a²</text>
+    <text x="610" y="285" fill="#10b981">d₂²</text>
+
+    <!-- Row 4 -->
+    <text x="170" y="345" fill="#ef4444">1</text>
+    <text x="280" y="345" fill="#38bdf8">b²</text>
+    <text x="390" y="345" fill="#38bdf8">a²</text>
+    <text x="500" y="345" fill="#64748b">0</text>
+    <text x="610" y="345" fill="#ec4899">d₃²</text>
+
+    <!-- Row 5 -->
+    <text x="170" y="405" fill="#ef4444">1</text>
+    <text x="280" y="405" fill="#f59e0b">d₁²</text>
+    <text x="390" y="405" fill="#10b981">d₂²</text>
+    <text x="500" y="405" fill="#ec4899">d₃²</text>
+    <text x="610" y="405" fill="#64748b">0</text>
+  </g>
+
+  <text x="735" y="285" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="#f8fafc">=</text>
+  <text x="765" y="285" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="#22c55e">0</text>
+
+  <!-- Legend -->
+  <g transform="translate(100, 480)" font-family="system-ui, sans-serif" font-size="13">
+    <circle cx="10" cy="15" r="6" fill="#ef4444" />
+    <text x="25" y="19" fill="#cbd5e1">Bordering 1s (Metric Volume Gauge)</text>
+
+    <circle cx="270" cy="15" r="6" fill="#38bdf8" />
+    <text x="285" y="19" fill="#cbd5e1">Squared Triangle Sides (a², b², c²)</text>
+
+    <circle cx="490" cy="15" r="6" fill="#f59e0b" />
+    <text x="505" y="19" fill="#cbd5e1">Interior Point Distances (d₁², d₂², d₃²)</text>
+  </g>
+
+  <rect x="80" y="530" width="640" height="40" rx="8" fill="#1e1b4b" stroke="#4338ca" stroke-width="1" />
+  <text x="400" y="555" font-family="system-ui, sans-serif" font-size="13" fill="#c7d2fe" text-anchor="middle">
+    The determinant vanishing is the exact necessary and sufficient condition for 4 points to lie in Euclidean ℝ²
+  </text>
+</svg>

@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ../../web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+  python-engine:
+    build:
+      context: ../../
+      dockerfile: infra/docker/Dockerfile.python
+
+  go-engine:
+    build:
+      context: ../../
+      dockerfile: infra/docker/Dockerfile.go

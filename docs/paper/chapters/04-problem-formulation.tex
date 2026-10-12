@@ -1,0 +1,187 @@
+% Chapter 4: Problem Formulation
+% ============================================================
+
+\chapter{Problem Formulation}
+\label{ch:formulation}
+
+In this chapter, we establish the precise mathematical framework for the Vertex-Distance Perimeter Problem. We formalize the geometric setup, introduce coordinate systems, derive the fundamental equations, and characterize the feasibility conditions.
+
+\section{Geometric Setup}
+
+\begin{definition}[Configuration]
+\label{def:configuration}
+A \emph{VDPP configuration} is a pair $(\tri ABC, P)$ where:
+\begin{enumerate}[label=(\roman*)]
+    \item $\tri ABC$ is a non-degenerate triangle in $\R^2$, with vertices $A$, $B$, $C$ in counterclockwise orientation;
+    \item $P$ is a point in the interior of $\tri ABC$, i.e., $P \in \operatorname{int}(\tri ABC)$.
+\end{enumerate}
+The \emph{vertex distances} are $d_1 = \abs{PA}$, $d_2 = \abs{PB}$, $d_3 = \abs{PC}$, and the \emph{side lengths} are $a = \abs{BC}$, $b = \abs{AC}$, $c = \abs{AB}$.
+\end{definition}
+
+\begin{definition}[The Forward Problem]
+Given a configuration $(\tri ABC, P)$, the \emph{forward problem} is to compute the vertex distances $(d_1, d_2, d_3)$ from the known geometry (vertex coordinates).
+\end{definition}
+
+\begin{definition}[The Inverse Problem (VDPP)]
+Given positive reals $d_1, d_2, d_3 > 0$, the \emph{inverse problem} is to determine all configurations $(\tri ABC, P)$ such that $\abs{PA} = d_1$, $\abs{PB} = d_2$, $\abs{PC} = d_3$, and to compute the perimeter $\perim = a + b + c$ for each such configuration.
+\end{definition}
+
+\section{Coordinate Systems}
+
+\subsection{Point-Centered Polar Coordinates}
+
+The most natural coordinate system places $P$ at the origin and expresses the vertices in polar form:
+\begin{equation}
+\label{eq:polar-coords}
+A = (d_1 \cos\theta_1, \; d_1 \sin\theta_1), \quad
+B = (d_2 \cos\theta_2, \; d_2 \sin\theta_2), \quad
+C = (d_3 \cos\theta_3, \; d_3 \sin\theta_3).
+\end{equation}
+
+\begin{remark}
+The rotational symmetry of the problem allows us to fix $\theta_1 = 0$ without loss of generality, placing vertex $A$ on the positive $x$-axis:
+\begin{equation}
+\label{eq:fix-rotation}
+A = (d_1, 0), \quad B = (d_2\cos\theta_2, d_2\sin\theta_2), \quad C = (d_3\cos\theta_3, d_3\sin\theta_3).
+\end{equation}
+\end{remark}
+
+\subsection{Angular Parameters at P}
+
+\begin{definition}[Subtended Angles]
+The \emph{subtended angles} at $P$ are:
+\begin{align}
+\alpha &= \angle BPC = \abs{\theta_2 - \theta_3}, \\
+\beta &= \angle APC = \abs{\theta_1 - \theta_3} = \abs{\theta_3} \quad (\text{when } \theta_1 = 0), \\
+\gamma &= \angle APB = \abs{\theta_1 - \theta_2} = \abs{\theta_2} \quad (\text{when } \theta_1 = 0).
+\end{align}
+\end{definition}
+
+Since $P$ is in the interior of $\tri ABC$, the vertices appear around $P$ in a full revolution:
+\begin{equation}
+\label{eq:angle-sum}
+\alpha + \beta + \gamma = 2\pi.
+\end{equation}
+
+This is the \emph{angular constraint}, and it is the only constraint linking the angular parameters. Combined with the requirement that each angle satisfy $0 < \alpha, \beta, \gamma < 2\pi$, this defines the feasible angular domain.
+
+\section{Side Lengths from Vertex Distances and Angles}
+
+By the law of cosines applied to triangles $\tri BPC$, $\tri APC$, and $\tri APB$:
+
+\begin{align}
+a^2 &= d_2^2 + d_3^2 - 2d_2 d_3 \cos\alpha, \label{eq:side-a-formal} \\
+b^2 &= d_1^2 + d_3^2 - 2d_1 d_3 \cos\beta, \label{eq:side-b-formal} \\
+c^2 &= d_1^2 + d_2^2 - 2d_1 d_2 \cos\gamma. \label{eq:side-c-formal}
+\end{align}
+
+The perimeter is then:
+\begin{equation}
+\label{eq:perimeter-formal}
+\perim(\alpha, \beta) = \sqrt{d_2^2 + d_3^2 - 2d_2 d_3 \cos\alpha} + \sqrt{d_1^2 + d_3^2 - 2d_1 d_3 \cos\beta} + \sqrt{d_1^2 + d_2^2 - 2d_1 d_2 \cos(2\pi - \alpha - \beta)}.
+\end{equation}
+
+\begin{observation}
+The perimeter $\perim$ is a continuous function of \emph{two} angular parameters $(\alpha, \beta)$ (with $\gamma = 2\pi - \alpha - \beta$ determined by the constraint~\eqref{eq:angle-sum}). Since no additional constraints fix $\alpha$ and $\beta$, the perimeter ranges over a continuous interval as $(\alpha, \beta)$ varies over the feasible domain. This confirms the underdeterminacy of the problem.
+\end{observation}
+
+\section{Feasibility Conditions}
+
+Not every triple $(d_1, d_2, d_3)$ of positive reals can arise from a VDPP configuration. We must ensure that:
+
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Positive side lengths.} Each of $a$, $b$, $c$ computed from~\eqref{eq:side-a-formal}--\eqref{eq:side-c-formal} must be positive.
+
+    \item \textbf{Triangle inequality.} The side lengths must satisfy the triangle inequality: $a + b > c$, $b + c > a$, $a + c > b$.
+
+    \item \textbf{Interior point condition.} The point $P$ must lie strictly inside $\tri ABC$. This is equivalent to requiring that $P$ has positive barycentric coordinates with respect to $\tri ABC$:
+    \begin{equation}
+    \lambda_A, \lambda_B, \lambda_C > 0, \quad \lambda_A + \lambda_B + \lambda_C = 1.
+    \end{equation}
+
+    \item \textbf{Angle constraints.} Each subtended angle must satisfy $0 < \alpha, \beta, \gamma < \pi$ for $P$ to be strictly interior (angles exceeding $\pi$ would place $P$ outside the triangle or on a side extension).
+\end{enumerate}
+
+\begin{proposition}[Necessary Condition]
+\label{prop:necessary}
+If $(d_1, d_2, d_3)$ are the vertex distances of a VDPP configuration, then for any $(\alpha, \beta)$ satisfying the angular constraint~\eqref{eq:angle-sum} with $0 < \alpha, \beta, 2\pi - \alpha - \beta < \pi$, the computed side lengths are positive and the triangle inequality is satisfied.
+\end{proposition}
+
+\begin{proof}
+Since $0 < \alpha < \pi$, we have $-1 < \cos\alpha < 1$, which gives:
+\[
+a^2 = d_2^2 + d_3^2 - 2d_2 d_3\cos\alpha > d_2^2 + d_3^2 - 2d_2 d_3 = (d_2 - d_3)^2 \geq 0.
+\]
+Hence $a > 0$ (equality would require $d_2 = d_3$ and $\alpha = 0$, contradicting $\alpha > 0$). The same argument applies to $b$ and $c$.
+
+For the triangle inequality, observe that the configuration $(d_1, \alpha), (d_2, \alpha), (d_3, \alpha)$ with the angular constraint defines a valid triangle by construction (the three sub-triangles $\tri APB$, $\tri BPC$, $\tri APC$ tile the interior of $\tri ABC$ with no overlaps when $P$ is interior).
+\end{proof}
+
+\section{The Solution Manifold}
+
+\begin{definition}[Solution Manifold]
+\label{def:solution-manifold}
+For fixed vertex distances $(d_1, d_2, d_3) \in \R_{>0}^3$, the \emph{solution manifold} is the set:
+\begin{equation}
+\mathcal{M}(d_1, d_2, d_3) = \left\{ (a, b, c) \in \R_{>0}^3 \;\middle|\; \exists\, (\alpha, \beta) \in \Omega : \text{Eqs.~\eqref{eq:side-a-formal}--\eqref{eq:side-c-formal} hold} \right\},
+\end{equation}
+where $\Omega = \{(\alpha, \beta) : 0 < \alpha, \beta < \pi, \; 0 < 2\pi - \alpha - \beta < \pi\}$ is the feasible angular domain.
+\end{definition}
+
+The manifold $\mathcal{M}$ is a one-dimensional curve in the three-dimensional space of triangle shapes $(a, b, c)$. Its image under the perimeter map $\perim(a, b, c) = a + b + c$ is a bounded interval $[\perim_{\min}, \perim_{\max}]$.
+
+\begin{theorem}[Perimeter Range]
+\label{thm:perimeter-range}
+For any VDPP configuration with vertex distances $(d_1, d_2, d_3)$, the perimeter $\perim$ takes every value in a bounded interval $[\perim_{\min}, \perim_{\max}]$, where:
+\begin{align}
+\perim_{\min} &> \max(d_1, d_2, d_3) \cdot 2, \\
+\perim_{\max} &< 2(d_1 + d_2 + d_3).
+\end{align}
+The exact bounds depend on $(d_1, d_2, d_3)$ and are attained at boundary configurations of the feasible domain $\Omega$.
+\end{theorem}
+
+\section{The Forward Map and Its Properties}
+
+\begin{definition}[Forward Map]
+The \emph{forward map} $\Phi: \mathcal{C} \to \R_{>0}^3$ takes a VDPP configuration (modulo Euclidean motions) to its vertex distances:
+\begin{equation}
+\Phi(\tri ABC, P) = (d_1, d_2, d_3) = (\abs{PA}, \abs{PB}, \abs{PC}).
+\end{equation}
+\end{definition}
+
+The VDPP asks us to invert $\Phi$---or more precisely, to compute $\perim \circ \Phi^{-1}(d_1, d_2, d_3)$. Since $\Phi$ is not injective (its fibers are one-dimensional), the inverse is a multi-valued function, and the perimeter is correspondingly multi-valued.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=2.5]
+    % Triangle
+    \coordinate (A) at (0, 0);
+    \coordinate (B) at (3, 0);
+    \coordinate (C) at (1.2, 2.2);
+    \coordinate (P) at (1.3, 0.75);
+
+    % Fill triangle
+    \fill[blue!5] (A) -- (B) -- (C) -- cycle;
+
+    % Draw triangle sides
+    \draw[thick, primaryblue] (A) -- (B) node[midway, below] {$c$};
+    \draw[thick, primaryblue] (B) -- (C) node[midway, right] {$a$};
+    \draw[thick, primaryblue] (C) -- (A) node[midway, left] {$b$};
+
+    % Draw distances from P
+    \draw[dashed, warmred, thick] (P) -- (A) node[midway, below left] {$d_1$};
+    \draw[dashed, warmred, thick] (P) -- (B) node[midway, below right] {$d_2$};
+    \draw[dashed, warmred, thick] (P) -- (C) node[midway, right] {$d_3$};
+
+    % Draw angle arcs at P
+    \draw[accentcyan, thick] (P) ++(200:0.3) arc (200:340:0.3) node[midway, below, font=\small] {$\gamma$};
+
+    % Vertices
+    \fill (A) circle (1.5pt) node[below left] {$A$};
+    \fill (B) circle (1.5pt) node[below right] {$B$};
+    \fill (C) circle (1.5pt) node[above] {$C$};
+    \fill[warmred] (P) circle (1.5pt) node[above right, font=\small] {$P$};
+\end{tikzpicture}
+\caption{The VDPP configuration: triangle $\tri ABC$ with interior point $P$. The known quantities are the vertex distances $d_1 = PA$, $d_2 = PB$, $d_3 = PC$ (dashed red). The unknowns are the side lengths $a$, $b$, $c$ (solid blue).}
+\label{fig:vdpp-setup}
+\end{figure}

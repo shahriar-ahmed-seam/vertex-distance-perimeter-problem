@@ -1,0 +1,55 @@
+% Chapter 14: Acute and Obtuse Triangle Cases
+\chapter{Acute and Obtuse Triangle Cases}
+\label{ch:acute-obtuse}
+
+\section{Classification Criteria}
+A triangle $\tri ABC$ is classified by its largest angle:
+\begin{itemize}
+    \item \textbf{Acute:} All angles $< \pi/2$, equivalently $a^2 + b^2 > c^2$, $b^2 + c^2 > a^2$, $a^2 + c^2 > b^2$.
+    \item \textbf{Right:} One angle $= \pi/2$ (Chapter~\ref{ch:right}).
+    \item \textbf{Obtuse:} One angle $> \pi/2$, equivalently one of the squared-side inequalities is reversed.
+\end{itemize}
+
+\section{Acute Triangle Constraints}
+For an acute triangle, all three cosine inequalities hold:
+\begin{equation}
+\cos\hat{A} > 0, \quad \cos\hat{B} > 0, \quad \cos\hat{C} > 0.
+\end{equation}
+Using $\cos\hat{A} = (b^2 + c^2 - a^2)/(2bc)$, the acute conditions translate to:
+\begin{equation}
+a^2 < b^2 + c^2, \quad b^2 < a^2 + c^2, \quad c^2 < a^2 + b^2.
+\end{equation}
+These three strict inequalities carve out a \emph{proper open cone} in $(a, b, c)$-space. The intersection of the solution manifold $\mathcal{M}$ with this cone gives the set of acute triangles compatible with the given vertex distances.
+
+\section{Obtuse Triangle Constraints}
+For an obtuse triangle with $\hat{C} > \pi/2$ (WLOG, the largest angle is at $C$):
+\begin{equation}
+c^2 > a^2 + b^2.
+\end{equation}
+This reverses one inequality, placing the solution in a different region of $(a, b, c)$-space.
+
+\section{Impact on the Subtended Angles}
+
+The type of triangle affects the range of subtended angles at $P$:
+\begin{proposition}
+For an acute triangle $\tri ABC$ with interior point $P$:
+\begin{equation}
+\frac{\pi}{3} < \alpha, \beta, \gamma < \pi \quad \text{(with } \alpha + \beta + \gamma = 2\pi\text{)}.
+\end{equation}
+For an obtuse triangle, the subtended angle opposite the obtuse vertex can be smaller than $\pi/3$.
+\end{proposition}
+
+\section{Solution Manifold Decomposition}
+The solution manifold $\mathcal{M}$ decomposes into three regions based on triangle type:
+\begin{equation}
+\mathcal{M} = \mathcal{M}_{\text{acute}} \sqcup \mathcal{M}_{\text{right}} \sqcup \mathcal{M}_{\text{obtuse}},
+\end{equation}
+where $\mathcal{M}_{\text{right}}$ consists of isolated points (codimension 1 in $\mathcal{M}$) and the other two are open arcs.
+
+\section{Numerical Comparison}
+The computational engines (Chapter~\ref{ch:numerical}) classify each solution found on $\mathcal{M}$ by type and compute type-specific statistics:
+\begin{itemize}
+    \item Fraction of the manifold arc that corresponds to each type.
+    \item Perimeter range within each type.
+    \item Location of the type transitions (right triangle boundaries).
+\end{itemize}

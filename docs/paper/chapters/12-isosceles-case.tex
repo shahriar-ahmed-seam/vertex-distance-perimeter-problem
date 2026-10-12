@@ -1,0 +1,85 @@
+% Chapter 12: The Isosceles Triangle Case
+% ============================================================
+
+\chapter{The Isosceles Triangle Case}
+\label{ch:isosceles}
+
+When the triangle is isosceles, the symmetry reduces the system's degrees of freedom and yields a lower-degree polynomial.
+
+\section{Setup}
+
+Without loss of generality, let $b = c$ (the two sides adjacent to vertex $A$ are equal). Then $\tri ABC$ is isosceles with the axis of symmetry passing through $A$ and the midpoint of $BC$.
+
+The Cayley--Menger constraint with $b = c$ becomes:
+\begin{equation}
+\CM_4\big|_{b=c} = \begin{vmatrix}
+0 & 1 & 1 & 1 & 1 \\
+1 & 0 & b^2 & b^2 & d_1^2 \\
+1 & b^2 & 0 & a^2 & d_2^2 \\
+1 & b^2 & a^2 & 0 & d_3^2 \\
+1 & d_1^2 & d_2^2 & d_3^2 & 0
+\end{vmatrix} = 0.
+\end{equation}
+
+\section{Reduction to Two Unknowns}
+
+With $b = c$, we have two unknowns: $a$ and $b$. The Cayley--Menger determinant provides one polynomial equation in $(a, b)$. The isosceles constraint has already consumed one degree of freedom, reducing the deficit from 2 to 1.
+
+\subsection{The Reduced Polynomial}
+
+Expanding $\CM_4|_{b=c}$ (using symbolic computation):
+
+Using the auxiliary variables:
+\begin{align}
+u &= d_2^2 + d_3^2 - a^2, \\
+v &= d_1^2 + d_3^2 - b^2, \\
+w &= d_1^2 + d_2^2 - b^2.
+\end{align}
+
+Note that $w$ now uses $b$ instead of $c$, since $b = c$.
+
+The master polynomial~\eqref{eq:master-final} becomes:
+\begin{equation}
+d_3^2 w^2 - uvw + d_2^2 v^2 + d_1^2 u^2 - 4d_1^2 d_2^2 d_3^2 = 0.
+\end{equation}
+
+Substituting $w = d_1^2 + d_2^2 - b^2$ and simplifying yields a polynomial in $(a^2, b^2)$ that can be analyzed for fixed $(d_1, d_2, d_3)$.
+
+\section{Symmetry Axis Constraint}
+
+For an isosceles triangle $b = c$, the axis of symmetry passes through vertex $A$ and the midpoint $M$ of $BC$. If $P$ lies on this axis (i.e., $d_2 = d_3$), additional simplification occurs.
+
+\begin{theorem}[Isosceles with Symmetric Point]
+If $b = c$ and $d_2 = d_3$, the Cayley--Menger determinant reduces to a quartic in $b^2$ (for fixed $a$) or a quartic in $a^2$ (for fixed $b$).
+\end{theorem}
+
+\section{Special Case: $d_2 = d_3$}
+
+When $d_2 = d_3 = d$ (the interior point is equidistant from $B$ and $C$), the problem inherits the bilateral symmetry. Setting $u = 2d^2 - a^2$, $v = d_1^2 + d^2 - b^2$:
+
+\begin{equation}
+d^2(d_1^2 + d^2 - b^2)^2 - (2d^2 - a^2)(d_1^2 + d^2 - b^2)^2 + d^2(d_1^2 + d^2 - b^2)^2 + d_1^2(2d^2 - a^2)^2 - 4d_1^2 d^4 = 0.
+\end{equation}
+
+This simplifies considerably, yielding a relation between $a$ and $b$ that, combined with $b = c$, determines the triangle up to the remaining degree of freedom.
+
+\section{Perimeter Formula for Isosceles}
+
+The perimeter in the isosceles case ($b = c$) is:
+\begin{equation}
+\perim = a + 2b.
+\end{equation}
+
+Given the polynomial relation $F(a^2, b^2; d_1, d_2, d_3) = 0$, the perimeter becomes a function of one parameter (e.g., $a$), with $b$ determined implicitly by $F = 0$:
+\begin{equation}
+\perim(a) = a + 2\sqrt{b^2(a)},
+\end{equation}
+where $b^2(a)$ is obtained by solving $F$ for $b^2$.
+
+\section{Numerical Examples}
+
+\begin{example}
+Let $d_1 = 2$, $d_2 = d_3 = 3$, and require $b = c$.
+
+The symmetry $d_2 = d_3$ is consistent with $b = c$ when $P$ lies on the axis of symmetry. The Cayley--Menger constraint gives a polynomial in $(a, b)$ that yields specific solutions.
+\end{example}

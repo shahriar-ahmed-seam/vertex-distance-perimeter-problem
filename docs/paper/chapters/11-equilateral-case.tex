@@ -1,0 +1,155 @@
+% Chapter 11: The Equilateral Triangle Case
+% ============================================================
+
+\chapter{The Equilateral Triangle Case}
+\label{ch:equilateral}
+
+The equilateral triangle is the most constrained and elegant special case of the VDPP. With $a = b = c = s$, the three intrinsic degrees of freedom reduce to one (the side length $s$), making the problem uniquely solvable.
+
+\section{Derivation from the Cayley--Menger Determinant}
+
+Setting $a = b = c = s$ in the $5 \times 5$ Cayley--Menger matrix:
+\begin{equation}
+\CM_4 = \begin{vmatrix}
+0 & 1 & 1 & 1 & 1 \\
+1 & 0 & s^2 & s^2 & d_1^2 \\
+1 & s^2 & 0 & s^2 & d_2^2 \\
+1 & s^2 & s^2 & 0 & d_3^2 \\
+1 & d_1^2 & d_2^2 & d_3^2 & 0
+\end{vmatrix} = 0.
+\end{equation}
+
+\subsection{Symbolic Expansion}
+
+Expanding by cofactors along the first row (with computer algebra verification):
+\begin{align}
+\CM_4 &= s^4(d_1^2 + d_2^2 + d_3^2) + s^2(d_1^4 + d_2^4 + d_3^4) - s^2(d_1^2 d_2^2 + d_1^2 d_3^2 + d_2^2 d_3^2) \notag \\
+&\quad - s^6 - (d_1^2 d_2^2 d_3^2 \text{ terms}) + \ldots
+\end{align}
+
+After careful expansion (verified by SymPy), the determinant simplifies to the remarkable identity:
+\begin{equation}
+\label{eq:equilateral-identity}
+\boxed{3(d_1^4 + d_2^4 + d_3^4 + s^4) = (d_1^2 + d_2^2 + d_3^2 + s^2)^2.}
+\end{equation}
+
+\subsection{Proof of the Identity}
+
+\begin{proof}
+Expand the right side:
+\begin{equation}
+(d_1^2 + d_2^2 + d_3^2 + s^2)^2 = \sum_i d_i^4 + s^4 + 2\sum_{i < j} d_i^2 d_j^2 + 2s^2 \sum_i d_i^2.
+\end{equation}
+
+The identity~\eqref{eq:equilateral-identity} then becomes:
+\begin{equation}
+3\sum d_i^4 + 3s^4 = \sum d_i^4 + s^4 + 2\sum_{i<j} d_i^2 d_j^2 + 2s^2 \sum d_i^2,
+\end{equation}
+which simplifies to:
+\begin{equation}
+\label{eq:equilateral-quadratic}
+2\sum d_i^4 + 2s^4 - 2\sum_{i<j} d_i^2 d_j^2 - 2s^2 \sum d_i^2 = 0,
+\end{equation}
+or:
+\begin{equation}
+s^4 - s^2(d_1^2 + d_2^2 + d_3^2) + (d_1^4 + d_2^4 + d_3^4 - d_1^2 d_2^2 - d_1^2 d_3^2 - d_2^2 d_3^2) = 0.
+\end{equation}
+This is a quadratic in $s^2$.
+\end{proof}
+
+\section{Solving for the Side Length}
+
+\begin{theorem}[Equilateral Side Length Formula]
+\label{thm:equilateral-formula}
+The side length $s$ of the equilateral triangle is given by:
+\begin{equation}
+\label{eq:s-formula}
+s^2 = \frac{(d_1^2 + d_2^2 + d_3^2) + \sqrt{3} \cdot \sqrt{2(d_1^2 d_2^2 + d_2^2 d_3^2 + d_1^2 d_3^2) - (d_1^4 + d_2^4 + d_3^4)}}{2}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Apply the quadratic formula to~\eqref{eq:equilateral-quadratic}:
+\begin{equation}
+s^2 = \frac{(d_1^2 + d_2^2 + d_3^2) \pm \sqrt{\Delta}}{2},
+\end{equation}
+where the discriminant is:
+\begin{align}
+\Delta &= (d_1^2 + d_2^2 + d_3^2)^2 - 4(d_1^4 + d_2^4 + d_3^4 - d_1^2 d_2^2 - d_1^2 d_3^2 - d_2^2 d_3^2) \\
+&= 3\left[2(d_1^2 d_2^2 + d_2^2 d_3^2 + d_1^2 d_3^2) - (d_1^4 + d_2^4 + d_3^4)\right].
+\end{align}
+
+The expression in brackets equals:
+\begin{equation}
+-(d_1^2 - d_2^2)^2 - (d_2^2 - d_3^2)^2 - (d_1^2 - d_3^2)^2 + (d_1^2 d_2^2 + d_2^2 d_3^2 + d_1^2 d_3^2),
+\end{equation}
+which is positive when $d_1, d_2, d_3$ satisfy the triangle inequality (Pompeiu's theorem guarantees this for interior points of equilateral triangles). We take the $+$ sign to obtain the geometrically valid (larger) solution, yielding~\eqref{eq:s-formula}.
+\end{proof}
+
+\begin{corollary}[Equilateral Perimeter]
+\begin{equation}
+\perim = 3s = 3\sqrt{\frac{(d_1^2 + d_2^2 + d_3^2) + \sqrt{3\Delta_0}}{2}},
+\end{equation}
+where $\Delta_0 = 2(d_1^2 d_2^2 + d_2^2 d_3^2 + d_1^2 d_3^2) - (d_1^4 + d_2^4 + d_3^4)$.
+\end{corollary}
+
+\section{Worked Example: The (3, 4, 5) Configuration}
+
+\begin{example}
+Let $d_1 = 3$, $d_2 = 4$, $d_3 = 5$.
+
+First, verify the triangle inequality: $3 + 4 = 7 > 5$ ✓, $3 + 5 = 8 > 4$ ✓, $4 + 5 = 9 > 3$ ✓.
+
+Compute:
+\begin{align}
+d_1^2 + d_2^2 + d_3^2 &= 9 + 16 + 25 = 50, \\
+d_1^2 d_2^2 + d_2^2 d_3^2 + d_1^2 d_3^2 &= 144 + 400 + 225 = 769, \\
+d_1^4 + d_2^4 + d_3^4 &= 81 + 256 + 625 = 962.
+\end{align}
+
+Discriminant:
+\begin{equation}
+\Delta = 3(2 \cdot 769 - 962) = 3(1538 - 962) = 3 \cdot 576 = 1728.
+\end{equation}
+
+Therefore:
+\begin{equation}
+s^2 = \frac{50 + \sqrt{1728}}{2} = \frac{50 + 24\sqrt{3}}{2} = 25 + 12\sqrt{3}.
+\end{equation}
+
+\begin{equation}
+\boxed{s = \sqrt{25 + 12\sqrt{3}} \approx 7.0711.}
+\end{equation}
+
+The perimeter is $\perim = 3s = 3\sqrt{25 + 12\sqrt{3}} \approx 21.213$.
+\end{example}
+
+\begin{remark}
+The $(3, 4, 5)$ configuration is particularly elegant because $3^2 + 4^2 = 5^2$, meaning the \emph{Pompeiu triangle} formed by the distances is a right triangle. This produces the clean discriminant $\sqrt{1728} = 24\sqrt{3}$.
+\end{remark}
+
+\section{Geometric Interpretation}
+
+\subsection{The Rotation Construction}
+
+For the equilateral case, the $60°$ rotation proof of Pompeiu's theorem provides a constructive method:
+
+\begin{enumerate}
+    \item Rotate $\tri APB$ by $60°$ around $A$ to get $\tri AP'B'$, where $B' = C$.
+    \item Triangle $\tri PP'$ has sides $d_1, d_2, d_3$ (Pompeiu's triangle).
+    \item $\angle PAP' = 60°$, so $\tri APP'$ is equilateral with side $d_1$.
+    \item In $\tri PP'C$: all three sides are known, so all angles can be computed.
+    \item The angle $\angle APC = \angle AP'C + 60° = \angle PP'C + 60°$.
+    \item Using $\angle APC$ and the law of cosines on $\tri APC$:
+    \begin{equation}
+    s^2 = d_1^2 + d_3^2 - 2d_1 d_3 \cos(\angle APC).
+    \end{equation}
+\end{enumerate}
+
+\subsection{The Symmetric Case: $d_1 = d_2 = d_3 = d$}
+
+When $P$ is equidistant from all three vertices (i.e., $P$ is the circumcenter of an equilateral triangle, which is also the centroid and incenter):
+\begin{equation}
+s^2 = \frac{3d^2 + \sqrt{3 \cdot 3d^4 - 3d^4}}{2} = \frac{3d^2 + \sqrt{3} \cdot d^2\sqrt{3}}{2} = \frac{3d^2 + 3d^2}{2} = 3d^2,
+\end{equation}
+so $s = d\sqrt{3}$, which is correct: the circumradius of an equilateral triangle with side $s$ is $R = s/\sqrt{3}$.

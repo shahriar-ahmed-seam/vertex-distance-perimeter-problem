@@ -1,0 +1,124 @@
+% Chapter 2: Introduction
+% ============================================================
+
+\chapter{Introduction}
+\label{ch:introduction}
+
+\section{Motivation}
+
+The triangle is the simplest polygon and arguably the most fundamental geometric object in the Euclidean plane. Its study has occupied mathematicians for over two millennia, from Euclid's \emph{Elements} through the explosion of triangle geometry in the 19th century to modern computational approaches. Yet certain natural questions about triangles remain surprisingly subtle.
+
+Consider the following scenario: you stand at an unknown point inside an open field bounded by three landmarks. You can measure your distance to each landmark precisely, but you cannot directly measure the distances between the landmarks themselves. \emph{What can you determine about the shape of the triangle formed by those landmarks?}
+
+This is the \textbf{Vertex-Distance Perimeter Problem} (VDPP):
+
+\begin{problem}[The Vertex-Distance Perimeter Problem]
+\label{prob:vdpp}
+Let $\tri ABC$ be a triangle in the Euclidean plane $\R^2$, and let $P$ be a point in the interior of $\tri ABC$. Given the distances
+\[
+d_1 = \abs{PA}, \quad d_2 = \abs{PB}, \quad d_3 = \abs{PC},
+\]
+determine the perimeter $\perim = a + b + c$, where $a = \abs{BC}$, $b = \abs{AC}$, and $c = \abs{AB}$.
+\end{problem}
+
+At first glance, this appears to be a straightforward problem in distance geometry: three measurements should impose three constraints on three unknowns (the side lengths). However, as we shall demonstrate in Chapter~\ref{ch:dof}, the situation is far more nuanced. The position of $P$ within the triangle introduces two additional degrees of freedom, rendering the problem \emph{underdetermined} and giving rise to a one-parameter family of valid triangles.
+
+\section{The Central Challenge}
+
+The key difficulty can be stated concisely. Place $P$ at the origin and express the vertices in polar coordinates:
+\begin{equation}
+\label{eq:polar-setup}
+A = (d_1, \theta_1), \quad B = (d_2, \theta_2), \quad C = (d_3, \theta_3).
+\end{equation}
+The side lengths are then determined by the law of cosines:
+\begin{align}
+a^2 &= d_2^2 + d_3^2 - 2d_2 d_3 \cos(\theta_2 - \theta_3), \label{eq:side-a} \\
+b^2 &= d_1^2 + d_3^2 - 2d_1 d_3 \cos(\theta_1 - \theta_3), \label{eq:side-b} \\
+c^2 &= d_1^2 + d_2^2 - 2d_1 d_2 \cos(\theta_1 - \theta_2). \label{eq:side-c}
+\end{align}
+
+The distances $d_1, d_2, d_3$ are known. The angles $\theta_1, \theta_2, \theta_3$ are not. However, these angles are not fully free: the constraint that $P$ lies in the interior of $\tri ABC$ imposes that the angular sectors around $P$ must sum to $2\pi$:
+\begin{equation}
+\label{eq:angle-constraint}
+\alpha + \beta + \gamma = 2\pi,
+\end{equation}
+where $\alpha = \angle BPC$, $\beta = \angle APC$, $\gamma = \angle APB$. After fixing the rotational degree of freedom (e.g., setting $\theta_1 = 0$), we have two free parameters $(\theta_2, \theta_3)$ subject to one constraint~\eqref{eq:angle-constraint}, leaving a \emph{one-dimensional solution manifold}.
+
+\section{Why This Problem Matters}
+
+The VDPP sits at a fertile crossroads of several mathematical disciplines:
+
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Distance Geometry.} The problem is a special case of the general distance geometry question: given partial distance information among a set of points, determine the full distance matrix or, equivalently, a point configuration realizing those distances. The Cayley--Menger determinant~\citep{cayley1841,menger1928,blumenthal1953} provides the fundamental algebraic tool.
+
+    \item \textbf{Classical Triangle Geometry.} The problem connects to a constellation of classical results: Pompeiu's theorem~\citep{pompeiu1936}, Van Schooten's theorem, Stewart's theorem~\citep{stewart1746}, the Leibniz distance formula, and the theory of triangle centers.
+
+    \item \textbf{Trilateration and Localization.} In applied settings---GPS, robotics, wireless sensor networks---the inverse problem of determining positions from distance measurements is of paramount practical importance~\citep{thomas2005revisiting}.
+
+    \item \textbf{Algebraic Geometry.} The solution manifold of the VDPP is an algebraic variety defined by polynomial equations of high degree (sextic or higher), whose structure encodes deep geometric information.
+
+    \item \textbf{Numerical Analysis.} The polynomial systems arising from the VDPP provide challenging test cases for root-finding algorithms, exhibiting multiple roots, near-degenerate configurations, and sensitivity to floating-point arithmetic.
+\end{enumerate}
+
+\section{Contributions of This Work}
+
+This monograph makes the following contributions:
+
+\begin{enumerate}
+    \item \textbf{Complete mathematical treatment.} We provide a self-contained development from first principles, including formal definitions, rigorous proofs, and explicit derivations for all main results.
+
+    \item \textbf{Degrees-of-freedom analysis.} We give a precise accounting of the problem's indeterminacy, characterizing the solution manifold as a one-dimensional curve in the space of triangle shapes.
+
+    \item \textbf{Classification by triangle type.} We derive optimized closed-form solutions for equilateral, isosceles, right, acute, and obtuse triangles, demonstrating how structural constraints collapse the solution manifold.
+
+    \item \textbf{Multi-language computational engines.} We implement five distinct solver algorithms across four programming languages, enabling rigorous comparison of accuracy, convergence, and performance.
+
+    \item \textbf{Non-Euclidean extensions.} We generalize the problem to spherical and hyperbolic geometries and to the three-dimensional tetrahedron setting.
+
+    \item \textbf{Interactive visualization.} We build a web-based simulation environment that makes the mathematical structures tangible and explorable.
+
+    \item \textbf{Formal verification.} We formalize core theorems in the Lean~4 proof assistant, providing machine-checked guarantees of correctness.
+\end{enumerate}
+
+\section{Organization}
+
+The remainder of this monograph is organized as follows:
+
+\begin{itemize}
+    \item \textbf{Chapter~\ref{ch:history}} surveys the historical development of the relevant mathematical ideas.
+    \item \textbf{Chapter~\ref{ch:formulation}} establishes the precise mathematical formulation of the VDPP.
+    \item \textbf{Chapter~\ref{ch:dof}} presents the degrees-of-freedom analysis.
+    \item \textbf{Chapter~\ref{ch:cayley-menger}} develops the Cayley--Menger determinant framework.
+    \item \textbf{Chapter~\ref{ch:pompeiu}} proves Pompeiu's theorem and its connections.
+    \item \textbf{Chapter~\ref{ch:stewart-leibniz}} explores Stewart's theorem and the Leibniz formula.
+    \item \textbf{Chapters~\ref{ch:analytical}--\ref{ch:generalized}} contain the core analytical derivations.
+    \item \textbf{Chapters~\ref{ch:equilateral}--\ref{ch:acute-obtuse}} treat special triangle types.
+    \item \textbf{Chapters~\ref{ch:spherical}--\ref{ch:tetrahedron}} develop the non-Euclidean and higher-dimensional extensions.
+    \item \textbf{Chapters~\ref{ch:numerical}--\ref{ch:results}} describe computational methods and experimental results.
+    \item \textbf{Chapter~\ref{ch:conclusion}} summarizes findings and identifies open problems.
+\end{itemize}
+
+\section{Notation}
+
+We establish the following notation used throughout:
+
+\begin{center}
+\begin{tabular}{cl}
+\toprule
+\textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+$\tri ABC$ & Triangle with vertices $A$, $B$, $C$ \\
+$P$ & Interior point \\
+$d_1, d_2, d_3$ & Distances $PA$, $PB$, $PC$ \\
+$a, b, c$ & Side lengths: $a = BC$, $b = AC$, $c = AB$ \\
+$\alpha, \beta, \gamma$ & Angles at $P$: $\alpha = \angle BPC$, $\beta = \angle APC$, $\gamma = \angle APB$ \\
+$\hat{A}, \hat{B}, \hat{C}$ & Interior angles of $\tri ABC$ at vertices $A$, $B$, $C$ \\
+$\perim$ & Perimeter: $\perim = a + b + c$ \\
+$s$ & Semi-perimeter: $s = \perim / 2$ \\
+$\area$ & Area of $\tri ABC$ \\
+$R$ & Circumradius \\
+$r$ & Inradius \\
+$\CM_n$ & $n \times n$ Cayley--Menger determinant \\
+\bottomrule
+\end{tabular}
+\end{center}

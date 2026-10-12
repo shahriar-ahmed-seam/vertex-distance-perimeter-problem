@@ -1,0 +1,175 @@
+\documentclass[12pt, a4paper]{report}
+
+% ============================================================
+% PACKAGES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{natbib}
+\usepackage{appendix}
+
+\usetikzlibrary{calc, angles, quotes, decorations.markings, patterns, arrows.meta}
+\pgfplotsset{compat=1.18}
+
+% ============================================================
+% PAGE GEOMETRY
+% ============================================================
+\geometry{
+    top=2.5cm,
+    bottom=2.5cm,
+    left=3cm,
+    right=3cm
+}
+
+% ============================================================
+% COLORS
+% ============================================================
+\definecolor{primaryblue}{HTML}{1A237E}
+\definecolor{accentcyan}{HTML}{00BCD4}
+\definecolor{warmred}{HTML}{E53935}
+\definecolor{deepgreen}{HTML}{2E7D32}
+\definecolor{goldaccent}{HTML}{FFB300}
+\definecolor{codebg}{HTML}{F5F5F5}
+
+% ============================================================
+% HYPERREF SETUP
+% ============================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblue,
+    citecolor=deepgreen,
+    urlcolor=accentcyan,
+    pdftitle={The Vertex-Distance Perimeter Problem},
+    pdfauthor={Shahriar},
+    pdfsubject={Computational Geometry},
+    pdfkeywords={triangle, vertex distance, perimeter, Cayley-Menger, Pompeiu}
+}
+
+% ============================================================
+% THEOREM ENVIRONMENTS
+% ============================================================
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{problem}[theorem]{Problem}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+\newtheorem{observation}[theorem]{Observation}
+
+% ============================================================
+% CUSTOM COMMANDS
+% ============================================================
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\dist}[2]{d(#1, #2)}
+\newcommand{\perim}{\mathcal{P}}
+\newcommand{\area}{\mathcal{A}}
+\newcommand{\vol}{\mathcal{V}}
+\newcommand{\CM}{\mathrm{CM}}
+\newcommand{\tri}{\triangle}
+\newcommand{\vd}{vertex-distance}
+
+% ============================================================
+% HEADER / FOOTER
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\nouppercase{\leftmark}}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ============================================================
+% TITLE
+% ============================================================
+\title{
+    \vspace{-2cm}
+    {\Huge\bfseries The Vertex-Distance Perimeter Problem}\\[0.8cm]
+    {\Large\itshape A Comprehensive Study of Triangle Reconstruction\\
+    from Interior Point Distances}\\[1.5cm]
+    {\large Analytical Foundations, Computational Methods,\\
+    and Geometric Generalizations}
+}
+
+\author{
+    \textbf{Shahriar}\\[0.3cm]
+    \small Research Monograph\\
+    \small \texttt{triangle-thm}
+}
+
+\date{\today}
+
+% ============================================================
+% DOCUMENT
+% ============================================================
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+\input{chapters/01-abstract}
+\end{abstract}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+% --- Main Chapters ---
+\input{chapters/02-introduction}
+\input{chapters/03-historical-timeline}
+\input{chapters/04-problem-formulation}
+\input{chapters/05-degrees-of-freedom}
+\input{chapters/06-cayley-menger}
+\input{chapters/07-pompeiu-theorem}
+\input{chapters/08-stewart-leibniz}
+\input{chapters/09-analytical-derivation}
+\input{chapters/10-existence-uniqueness}
+\input{chapters/11-equilateral-case}
+\input{chapters/12-isosceles-case}
+\input{chapters/13-right-triangle-case}
+\input{chapters/14-acute-obtuse-cases}
+\input{chapters/15-generalized-formula}
+\input{chapters/16-spherical-extension}
+\input{chapters/17-hyperbolic-extension}
+\input{chapters/18-3d-tetrahedron}
+\input{chapters/19-numerical-methods}
+\input{chapters/20-computational-results}
+\input{chapters/21-conclusion}
+
+% --- Bibliography ---
+\bibliographystyle{plainnat}
+\bibliography{bibliography}
+
+\end{document}

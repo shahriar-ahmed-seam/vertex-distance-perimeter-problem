@@ -1,0 +1,19 @@
+{
+  "name": "@triangle-thm/core",
+  "version": "1.0.0",
+  "description": "Vertex-Distance Perimeter Problem core computational TypeScript library",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test dist/**/*.test.js"
+  },
+  "keywords": ["geometry", "triangle", "perimeter", "cayley-menger", "numerical-methods"],
+  "author": "Shahriar",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.11.0"
+  }
+}

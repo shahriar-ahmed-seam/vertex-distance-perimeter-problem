@@ -1,0 +1,221 @@
+% Chapter 8: Stewart's Theorem and the Leibniz Formula
+% ============================================================
+
+\chapter{Stewart's Theorem and the Leibniz Formula}
+\label{ch:stewart-leibniz}
+
+In this chapter, we develop two classical results---Stewart's theorem and the Leibniz distance formula---and demonstrate how they provide additional structural constraints on the VDPP.
+
+\section{Stewart's Theorem}
+
+\subsection{Statement and Proof}
+
+\begin{theorem}[Stewart's Theorem]
+\label{thm:stewart}
+Let $\tri ABC$ be a triangle with side lengths $a = BC$, $b = AC$, $c = AB$. Let $D$ be a point on segment $BC$ with $BD = m$ and $DC = n$ (so $a = m + n$). Let $d = AD$ be the length of the cevian. Then:
+\begin{equation}
+\label{eq:stewart}
+b^2 m + c^2 n = a(d^2 + mn).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Apply the law of cosines to triangles $\tri ABD$ and $\tri ACD$ with the common angle $\angle ADB$. Let $\theta = \angle ADB$. Then:
+\begin{align}
+c^2 &= d^2 + m^2 - 2dm\cos\theta, \label{eq:st-1}\\
+b^2 &= d^2 + n^2 - 2dn\cos(180° - \theta) = d^2 + n^2 + 2dn\cos\theta. \label{eq:st-2}
+\end{align}
+
+Multiply~\eqref{eq:st-1} by $n$ and~\eqref{eq:st-2} by $m$:
+\begin{align}
+c^2 n &= d^2 n + m^2 n - 2dmn\cos\theta, \\
+b^2 m &= d^2 m + mn^2 + 2dmn\cos\theta.
+\end{align}
+
+Adding:
+\begin{equation}
+b^2 m + c^2 n = d^2(m + n) + mn(m + n) = a(d^2 + mn). \qedhere
+\end{equation}
+\end{proof}
+
+\subsection{Stewart's Theorem and the VDPP}
+
+When the interior point $P$ is connected to each vertex and the cevians $AP$, $BP$, $CP$ are extended to meet the opposite sides at points $D$, $E$, $F$ respectively, Stewart's theorem applied to each cevian gives three relations:
+
+\begin{align}
+\text{Cevian } AD: \quad & b^2 \cdot BD + c^2 \cdot DC = a(AD^2 + BD \cdot DC), \label{eq:stew-1}\\
+\text{Cevian } BE: \quad & a^2 \cdot AE + c^2 \cdot EC = b(BE^2 + AE \cdot EC), \label{eq:stew-2}\\
+\text{Cevian } CF: \quad & a^2 \cdot BF + b^2 \cdot FA = c(CF^2 + BF \cdot FA). \label{eq:stew-3}
+\end{align}
+
+The cevian lengths $AD$, $BE$, $CF$ can be expressed in terms of the vertex distances $d_1, d_2, d_3$ and the ratios $AP/PD$, $BP/PE$, $CP/PF$.
+
+\subsection{Special Case: Medians (Apollonius's Theorem)}
+
+When $D$ is the midpoint of $BC$ (so $m = n = a/2$) and $AD$ is a median of length $m_a$, Stewart's theorem simplifies to:
+
+\begin{corollary}[Apollonius's Theorem]
+\begin{equation}
+\label{eq:apollonius}
+b^2 + c^2 = 2m_a^2 + \frac{a^2}{2},
+\end{equation}
+or equivalently:
+\begin{equation}
+m_a = \frac{1}{2}\sqrt{2b^2 + 2c^2 - a^2}.
+\end{equation}
+\end{corollary}
+
+When $P$ is the centroid $G$ (the intersection of the medians), we have $d_1 = GA$, $d_2 = GB$, $d_3 = GC$, and the median lengths are $m_a = \frac{3}{2} d_1$, etc. (since the centroid divides each median in the ratio $2:1$ from the vertex). This provides a direct link between vertex distances from the centroid and the side lengths.
+
+\section{The Leibniz Distance Formula}
+
+\subsection{Statement and Proof}
+
+\begin{theorem}[Leibniz Distance Formula]
+\label{thm:leibniz}
+Let $\tri ABC$ be a triangle with centroid $G$, and let $M$ be any point in the plane. Then:
+\begin{equation}
+\label{eq:leibniz}
+MA^2 + MB^2 + MC^2 = GA^2 + GB^2 + GC^2 + 3 \cdot MG^2.
+\end{equation}
+Moreover, the centroid distances satisfy:
+\begin{equation}
+\label{eq:centroid-distances}
+GA^2 + GB^2 + GC^2 = \frac{a^2 + b^2 + c^2}{3}.
+\end{equation}
+Therefore:
+\begin{equation}
+\label{eq:leibniz-combined}
+MA^2 + MB^2 + MC^2 = \frac{a^2 + b^2 + c^2}{3} + 3 \cdot MG^2.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Place the centroid at the origin: $G = \frac{A + B + C}{3} = \mathbf{0}$, so $A + B + C = \mathbf{0}$.
+
+For any point $M$:
+\begin{align}
+MA^2 + MB^2 + MC^2 &= \abs{M - A}^2 + \abs{M - B}^2 + \abs{M - C}^2 \\
+&= 3\abs{M}^2 - 2M \cdot (A + B + C) + \abs{A}^2 + \abs{B}^2 + \abs{C}^2 \\
+&= 3\abs{M}^2 + \abs{A}^2 + \abs{B}^2 + \abs{C}^2 \quad (\text{since } A + B + C = \mathbf{0}) \\
+&= 3 MG^2 + GA^2 + GB^2 + GC^2.
+\end{align}
+
+For~\eqref{eq:centroid-distances}, expand using $A + B + C = \mathbf{0}$:
+\begin{align}
+a^2 + b^2 + c^2 &= \abs{B - C}^2 + \abs{A - C}^2 + \abs{A - B}^2 \\
+&= 2(\abs{A}^2 + \abs{B}^2 + \abs{C}^2) - 2(A \cdot B + B \cdot C + A \cdot C).
+\end{align}
+Since $A + B + C = \mathbf{0}$, we have $\abs{A + B + C}^2 = 0$, which gives:
+\begin{equation}
+\abs{A}^2 + \abs{B}^2 + \abs{C}^2 + 2(A \cdot B + B \cdot C + A \cdot C) = 0.
+\end{equation}
+Therefore:
+\begin{equation}
+a^2 + b^2 + c^2 = 2(\abs{A}^2 + \abs{B}^2 + \abs{C}^2) + (\abs{A}^2 + \abs{B}^2 + \abs{C}^2) = 3(GA^2 + GB^2 + GC^2). \qedhere
+\end{equation}
+\end{proof}
+
+\subsection{Application to the VDPP}
+
+Setting $M = P$ (our interior point) in the Leibniz formula:
+\begin{equation}
+\label{eq:leibniz-vdpp}
+\boxed{d_1^2 + d_2^2 + d_3^2 = \frac{a^2 + b^2 + c^2}{3} + 3 \cdot PG^2.}
+\end{equation}
+
+This is a powerful relation: it connects the sum of squared vertex distances (which we \emph{know}) to the sum of squared side lengths (which we \emph{want}) and the distance from $P$ to the centroid (which we \emph{don't know}).
+
+\begin{corollary}[Bound on Sum of Squared Side Lengths]
+\label{cor:leibniz-bound}
+Since $PG^2 \geq 0$:
+\begin{equation}
+a^2 + b^2 + c^2 \leq 3(d_1^2 + d_2^2 + d_3^2),
+\end{equation}
+with equality if and only if $P$ is the centroid $G$.
+\end{corollary}
+
+\begin{corollary}[Centroid Characterization]
+\label{cor:centroid}
+If $P$ is the centroid of $\tri ABC$, then:
+\begin{equation}
+d_1^2 + d_2^2 + d_3^2 = \frac{a^2 + b^2 + c^2}{3},
+\end{equation}
+and the centroid divides each median in ratio $2:1$, so:
+\begin{equation}
+m_a = \frac{3}{2}d_1, \quad m_b = \frac{3}{2}d_2, \quad m_c = \frac{3}{2}d_3.
+\end{equation}
+Combining with Apollonius's theorem~\eqref{eq:apollonius}:
+\begin{align}
+a^2 &= 2b^2 + 2c^2 - 4m_a^2 = 2b^2 + 2c^2 - 9d_1^2, \\
+b^2 &= 2a^2 + 2c^2 - 9d_2^2, \\
+c^2 &= 2a^2 + 2b^2 - 9d_3^2.
+\end{align}
+This is a $3 \times 3$ linear system in $(a^2, b^2, c^2)$ that can be solved explicitly.
+\end{corollary}
+
+\section{The Centroid Case: Complete Solution}
+
+\begin{theorem}[VDPP Solution for the Centroid]
+\label{thm:centroid-solution}
+If $P$ is the centroid of $\tri ABC$, the VDPP has a unique solution:
+\begin{align}
+a^2 &= 3(d_2^2 + d_3^2) - 3d_1^2 = 3(d_2^2 + d_3^2 - d_1^2), \label{eq:centroid-a}\\
+b^2 &= 3(d_1^2 + d_3^2 - d_2^2), \label{eq:centroid-b}\\
+c^2 &= 3(d_1^2 + d_2^2 - d_3^2). \label{eq:centroid-c}
+\end{align}
+The perimeter is:
+\begin{equation}
+\perim = \sqrt{3(d_2^2 + d_3^2 - d_1^2)} + \sqrt{3(d_1^2 + d_3^2 - d_2^2)} + \sqrt{3(d_1^2 + d_2^2 - d_3^2)}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Solving the linear system from Corollary~\ref{cor:centroid}: adding all three equations gives $a^2 + b^2 + c^2 = 3(a^2 + b^2 + c^2) - 9(d_1^2 + d_2^2 + d_3^2)$, consistent with $a^2 + b^2 + c^2 = \frac{9}{2}(d_1^2 + d_2^2 + d_3^2) \cdot \frac{2}{3}$... 
+
+More directly, solve the $3 \times 3$ system. From the three Apollonius equations:
+\begin{equation}
+\begin{pmatrix} -1 & 2 & 2 \\ 2 & -1 & 2 \\ 2 & 2 & -1 \end{pmatrix} \begin{pmatrix} a^2 \\ b^2 \\ c^2 \end{pmatrix} = \begin{pmatrix} 9d_1^2 \\ 9d_2^2 \\ 9d_3^2 \end{pmatrix}.
+\end{equation}
+
+The inverse of the coefficient matrix is $\frac{1}{9}\begin{pmatrix} -3 & 6 & 6 \\ 6 & -3 & 6 \\ 6 & 6 & -3 \end{pmatrix}$... 
+
+Actually, the simpler approach: adding all three equations yields $3(a^2 + b^2 + c^2) = 9(d_1^2 + d_2^2 + d_3^2)$, so $a^2 + b^2 + c^2 = 3(d_1^2 + d_2^2 + d_3^2)$. Then subtracting individual equations from this sum yields~\eqref{eq:centroid-a}--\eqref{eq:centroid-c}.
+\end{proof}
+
+\begin{remark}
+The centroid case is one of the rare situations where the VDPP admits a \textbf{closed-form linear solution}. This is because the centroid's defining property (trisecting the medians) provides exactly the two additional constraints needed to make the system determined.
+\end{remark}
+
+\section{The Incenter Case}
+
+When $P$ is the incenter $I$ of $\tri ABC$, we have $d_1 = IA$, $d_2 = IB$, $d_3 = IC$. The incenter satisfies:
+\begin{align}
+IA &= \frac{r}{\sin(\hat{A}/2)}, \quad
+IB = \frac{r}{\sin(\hat{B}/2)}, \quad
+IC = \frac{r}{\sin(\hat{C}/2)},
+\end{align}
+where $r$ is the inradius and $\hat{A}, \hat{B}, \hat{C}$ are the interior angles. This gives:
+\begin{equation}
+\frac{d_1}{d_2} = \frac{\sin(\hat{B}/2)}{\sin(\hat{A}/2)}, \quad \frac{d_2}{d_3} = \frac{\sin(\hat{C}/2)}{\sin(\hat{B}/2)},
+\end{equation}
+providing two constraints that, combined with $\hat{A} + \hat{B} + \hat{C} = \pi$, determine the angles and hence the triangle shape.
+
+\section{Summary of Distance Identities}
+
+\begin{table}[h!]
+\centering
+\caption{Key distance identities for the VDPP.}
+\label{tab:distance-identities}
+\begin{tabular}{lll}
+\toprule
+\textbf{Identity} & \textbf{Source} & \textbf{Constraints Provided} \\
+\midrule
+$b^2 m + c^2 n = a(d^2 + mn)$ & Stewart & Cevian relations \\
+$d_1^2 + d_2^2 + d_3^2 = \frac{a^2+b^2+c^2}{3} + 3PG^2$ & Leibniz & 1 (up to $PG$) \\
+$\CM_4 = 0$ & Cayley--Menger & 1 polynomial \\
+$16\area^2 = -\CM_3$ & Heron/CM & Area relation \\
+$\area = \frac{1}{2}\sum d_i d_j \sin\alpha_k$ & Area decomposition & 1 (up to angles) \\
+\bottomrule
+\end{tabular}
+\end{table}

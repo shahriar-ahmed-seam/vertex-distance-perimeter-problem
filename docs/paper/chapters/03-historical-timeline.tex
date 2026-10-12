@@ -1,0 +1,178 @@
+% Chapter 3: Historical Timeline
+% ============================================================
+
+\chapter{Historical Timeline}
+\label{ch:history}
+
+The mathematical ideas underlying the Vertex-Distance Perimeter Problem have deep roots spanning over two millennia. This chapter traces the historical development of the key concepts, from ancient Greek geometry through 19th-century distance geometry to modern computational methods.
+
+\section{Ancient Foundations (c.~300 BCE -- 200 CE)}
+
+\subsection{Euclid's \emph{Elements} and the Triangle}
+
+The systematic study of triangles begins with Euclid's \emph{Elements} (c.~300 BCE), which established the axiomatic framework for plane geometry that would dominate mathematical thought for over two thousand years~\citep{euclid_elements}. Book~I of the \emph{Elements} introduces the triangle inequality (Proposition~I.20):
+
+\begin{theorem}[Triangle Inequality, Euclid I.20]
+In any triangle, the sum of any two sides is greater than the remaining side.
+\end{theorem}
+
+This elementary result becomes a crucial \emph{feasibility constraint} in our problem: not every triple $(d_1, d_2, d_3)$ of positive real numbers can arise as vertex distances from an interior point of some triangle.
+
+\subsection{Heron of Alexandria}
+
+Heron of Alexandria (c.~10--70 CE) derived the celebrated area formula bearing his name:
+\begin{equation}
+\area = \sqrt{s(s-a)(s-b)(s-c)},
+\end{equation}
+where $s = (a+b+c)/2$ is the semi-perimeter. Heron's formula establishes a polynomial relationship between the area and the side lengths of a triangle---a theme that will recur throughout our study, as the Cayley--Menger determinant can be viewed as a vast generalization of Heron's formula to arbitrary point configurations.
+
+\subsection{Ptolemy's Theorem}
+
+Claudius Ptolemy (c.~100--170 CE) proved a fundamental result about cyclic quadrilaterals in his \emph{Almagest}:
+
+\begin{theorem}[Ptolemy's Theorem]
+If $ABCD$ is a cyclic quadrilateral, then
+\[
+AC \cdot BD = AB \cdot CD + AD \cdot BC.
+\]
+\end{theorem}
+
+Ptolemy's theorem is an ancestor of the distance relations that the Cayley--Menger framework captures in full generality. When applied to a point on the circumcircle of an equilateral triangle, it yields Van Schooten's theorem (Section~\ref{sec:van-schooten}).
+
+\section{The Medieval and Early Modern Period (1200--1700)}
+
+\subsection{The Law of Cosines}
+
+While implicit in Euclid's Propositions II.12 and II.13, the \emph{law of cosines} in its modern algebraic form was developed by Persian and Arab mathematicians, notably al-Kashi (c.~1380--1429) in his \emph{Key to Arithmetic} (1427). In our notation:
+\begin{equation}
+\label{eq:law-of-cosines-hist}
+a^2 = b^2 + c^2 - 2bc\cos\hat{A}.
+\end{equation}
+
+The law of cosines is the engine that converts angular information at the interior point $P$ into side-length information for the triangle (Equations~\ref{eq:side-a}--\ref{eq:side-c}).
+
+\subsection{Stewart's Theorem (1746)}
+\label{sec:stewart-hist}
+
+The Scottish mathematician Matthew Stewart (1717--1785) published his theorem in 1746~\citep{stewart1746}:
+
+\begin{theorem}[Stewart's Theorem]
+\label{thm:stewart-hist}
+Let $D$ be a point on side $BC$ of triangle $\tri ABC$, dividing $BC$ into segments $BD = m$ and $DC = n$ (so $a = m + n$). Let $d = AD$. Then:
+\begin{equation}
+b^2 m + c^2 n = a(d^2 + mn).
+\end{equation}
+\end{theorem}
+
+Stewart's theorem relates the length of a \emph{cevian} (a segment from a vertex to the opposite side) to the side lengths. When $P$ is an interior point and we extend $AP$, $BP$, $CP$ to meet the opposite sides, Stewart's theorem constrains the resulting cevian lengths in terms of the side lengths and the vertex distances.
+
+\section{The 19th Century: Distance Geometry Emerges}
+
+\subsection{Cayley's Distance Determinant (1841)}
+\label{sec:cayley-hist}
+
+Arthur Cayley (1821--1895), in a remarkable 1841 paper~\citep{cayley1841}, introduced a determinantal formula for the volume of a simplex in terms of pairwise distances between its vertices. For a tetrahedron with vertices $P_0, P_1, P_2, P_3$ in $\R^3$:
+\begin{equation}
+\label{eq:cayley-original}
+288 \vol^2 = \begin{vmatrix}
+0 & 1 & 1 & 1 & 1 \\
+1 & 0 & d_{01}^2 & d_{02}^2 & d_{03}^2 \\
+1 & d_{01}^2 & 0 & d_{12}^2 & d_{13}^2 \\
+1 & d_{02}^2 & d_{12}^2 & 0 & d_{23}^2 \\
+1 & d_{03}^2 & d_{13}^2 & d_{23}^2 & 0
+\end{vmatrix},
+\end{equation}
+where $d_{ij} = \abs{P_i P_j}$.
+
+For our problem, the key observation is that when the four points $A$, $B$, $C$, $P$ are \emph{coplanar} (as they must be, since all lie in the plane of the triangle), the ``volume'' of the degenerate tetrahedron is zero. Setting the determinant~\eqref{eq:cayley-original} to zero produces a polynomial constraint linking all six pairwise distances---precisely the algebraic relation we need.
+
+\subsection{M\"obius and Four Coplanar Points (1852)}
+
+August Ferdinand M\"obius (1790--1868) published a general theorem in 1852 concerning the relationships among four points in the Euclidean plane~\citep{mobius1852}. His result, which subsumes Pompeiu's later theorem as a special case, established that the six distances among four coplanar points satisfy a polynomial identity. This is, in modern language, precisely the vanishing of the $5 \times 5$ Cayley--Menger determinant.
+
+\subsection{The Leibniz Distance Formula}
+
+Gottfried Wilhelm Leibniz (1646--1716) is credited with a formula relating distances from an arbitrary point to the vertices of a triangle~\citep{berger2009geometry}:
+\begin{theorem}[Leibniz Formula]
+\label{thm:leibniz-hist}
+Let $G$ be the centroid of $\tri ABC$, and let $M$ be any point in the plane. Then:
+\begin{equation}
+MA^2 + MB^2 + MC^2 = GA^2 + GB^2 + GC^2 + 3 \cdot MG^2 = \frac{a^2 + b^2 + c^2}{3} + 3 \cdot MG^2.
+\end{equation}
+\end{theorem}
+
+The Leibniz formula provides a direct link between the sum of squared vertex distances $d_1^2 + d_2^2 + d_3^2$ and the side lengths $(a, b, c)$---but only up to the unknown distance from $P$ to the centroid $G$.
+
+\section{The 20th Century: Metric Geometry and Pompeiu}
+
+\subsection{Karl Menger and Metric Geometry (1928)}
+\label{sec:menger-hist}
+
+Karl Menger (1902--1985), in his foundational work on metric geometry~\citep{menger1928}, systematized Cayley's ideas and introduced what is now called the \emph{Cayley--Menger determinant}. Menger's key contribution was to characterize when a set of ``abstract'' distances can be realized by a point configuration in $\R^n$:
+
+\begin{theorem}[Menger's Embedding Theorem]
+A set of $k+1$ points with prescribed pairwise distances can be isometrically embedded in $\R^n$ (but not in $\R^{n-1}$) if and only if the $(k+2) \times (k+2)$ Cayley--Menger determinant has the sign $(-1)^{k+1}$ and all principal sub-determinants satisfy the appropriate sign conditions.
+\end{theorem}
+
+\subsection{Pompeiu's Theorem (1936)}
+\label{sec:pompeiu-hist}
+
+The Romanian mathematician Dimitrie Pompeiu (1873--1954) published in 1936 a beautiful result~\citep{pompeiu1936} that is particularly relevant to our problem in the equilateral case:
+
+\begin{theorem}[Pompeiu's Theorem]
+\label{thm:pompeiu-hist}
+Let $\tri ABC$ be an equilateral triangle and let $P$ be any point in the plane. Then the distances $PA$, $PB$, $PC$ can form the sides of a (possibly degenerate) triangle.
+\end{theorem}
+
+The triangle formed by $PA$, $PB$, $PC$ is called \emph{Pompeiu's triangle}. It degenerates to a line segment precisely when $P$ lies on the circumcircle of $\tri ABC$---the content of Van Schooten's theorem.
+
+Although Pompeiu published this result in 1936, M\"obius had effectively established it in 1852 as a consequence of his more general theorem about four coplanar points. Nevertheless, Pompeiu's formulation and proof (via an elegant $60^\circ$ rotation argument) gave the result its enduring name.
+
+\subsection{Blumenthal and Distance Geometry (1953)}
+
+Leonard M. Blumenthal (1901--1984) published his comprehensive treatise \emph{Theory and Applications of Distance Geometry}~\citep{blumenthal1953}, which systematized the entire field. Blumenthal's work provided the rigorous foundations for using Cayley--Menger determinants to study realizability and rigidity of point configurations---the very tools we employ in Chapter~\ref{ch:cayley-menger}.
+
+\section{Modern Developments (1970--Present)}
+
+\subsection{Computational Distance Geometry}
+
+The advent of computers opened new directions in distance geometry:
+
+\begin{itemize}
+    \item \textbf{Molecular conformation.} Determining 3D protein structures from interatomic distance data (NMR spectroscopy) became a major application of distance geometry in the 1980s and 1990s~\citep{crippen1988distance}.
+
+    \item \textbf{Trilateration and GPS.} The Global Positioning System, operational since 1978, solves a three-dimensional version of our problem: determine position from distances to known satellites. The mathematical core is the same Cayley--Menger framework~\citep{thomas2005revisiting}.
+
+    \item \textbf{Sensor network localization.} In wireless sensor networks, determining node positions from pairwise range measurements is a direct generalization of our problem~\citep{so2007theory}.
+
+    \item \textbf{Rigidity theory.} The study of when a framework (a graph with edges realized as bars of fixed length) is rigid or flexible connects deeply to our analysis of the solution manifold~\citep{connelly2005generic}.
+\end{itemize}
+
+\subsection{Algebraic and Computational Approaches}
+
+Modern symbolic algebra systems (Maple, Mathematica, SymPy) have made it feasible to explicitly compute the Cayley--Menger determinant for our four-point configuration and to analyze the resulting polynomial system. Numerical methods---Newton--Raphson, homotopy continuation, Gr\"obner bases---provide computational tools for finding solutions within the algebraic variety.
+
+\section{Timeline Summary}
+
+\begin{table}[h!]
+\centering
+\caption{Key milestones in the mathematical development of the Vertex-Distance Perimeter Problem.}
+\label{tab:timeline}
+\begin{tabular}{lll}
+\toprule
+\textbf{Year} & \textbf{Mathematician} & \textbf{Contribution} \\
+\midrule
+c.~300 BCE & Euclid & Triangle inequality; axiomatic geometry \\
+c.~60 CE & Heron & Area formula from side lengths \\
+c.~150 CE & Ptolemy & Cyclic quadrilateral distance relation \\
+1427 & al-Kashi & Law of cosines in algebraic form \\
+1746 & Stewart & Cevian length theorem \\
+1841 & Cayley & Distance determinant for simplex volume \\
+1852 & M\"obius & Four coplanar points identity \\
+1928 & Menger & Metric embedding via Cayley--Menger determinants \\
+1936 & Pompeiu & Vertex distances form a triangle (equilateral case) \\
+1953 & Blumenthal & Systematic distance geometry treatise \\
+1978-- & Various & GPS, sensor networks, molecular geometry \\
+\bottomrule
+\end{tabular}
+\end{table}

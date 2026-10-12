@@ -1,0 +1,156 @@
+% Chapter 9: Analytical Derivation
+% ============================================================
+
+\chapter{Analytical Derivation}
+\label{ch:analytical}
+
+This chapter presents the step-by-step algebraic derivation of the polynomial system underlying the VDPP. We parameterize the problem by the subtended angles at $P$, derive the resulting equations, and analyze their algebraic structure.
+
+\section{The Parameterization}
+
+Recall from Chapter~\ref{ch:formulation} that we place $P$ at the origin and parameterize by the subtended angles $\alpha = \angle BPC$, $\beta = \angle APC$, $\gamma = \angle APB$, with the constraint $\alpha + \beta + \gamma = 2\pi$.
+
+Setting $\gamma = 2\pi - \alpha - \beta$, the side lengths are:
+\begin{align}
+a(\alpha) &= \sqrt{d_2^2 + d_3^2 - 2d_2 d_3 \cos\alpha}, \label{eq:a-of-alpha} \\
+b(\beta) &= \sqrt{d_1^2 + d_3^2 - 2d_1 d_3 \cos\beta}, \label{eq:b-of-beta} \\
+c(\alpha, \beta) &= \sqrt{d_1^2 + d_2^2 - 2d_1 d_2 \cos(2\pi - \alpha - \beta)}. \label{eq:c-of-alpha-beta}
+\end{align}
+
+Since $\cos(2\pi - x) = \cos(x)$:
+\begin{equation}
+c(\alpha, \beta) = \sqrt{d_1^2 + d_2^2 - 2d_1 d_2 \cos(\alpha + \beta)}.
+\end{equation}
+
+\section{Squaring to Eliminate Radicals}
+
+Define the squared side lengths:
+\begin{align}
+A &\equiv a^2 = d_2^2 + d_3^2 - 2d_2 d_3 \cos\alpha, \label{eq:A-sq} \\
+B &\equiv b^2 = d_1^2 + d_3^2 - 2d_1 d_3 \cos\beta, \label{eq:B-sq} \\
+C &\equiv c^2 = d_1^2 + d_2^2 - 2d_1 d_2 \cos(\alpha + \beta). \label{eq:C-sq}
+\end{align}
+
+These are \emph{trigonometric polynomials} in $(\alpha, \beta)$.
+
+\section{The Elimination Problem}
+
+\subsection{From Angles to Side Lengths}
+
+Given a specific $(\alpha, \beta) \in \Omega$, the computation of $(a, b, c)$ via~\eqref{eq:a-of-alpha}--\eqref{eq:c-of-alpha-beta} is straightforward. The \emph{inverse} problem---given $(a, b, c)$, find $(\alpha, \beta)$---requires solving:
+\begin{align}
+\cos\alpha &= \frac{d_2^2 + d_3^2 - a^2}{2d_2 d_3}, \label{eq:cos-alpha} \\
+\cos\beta &= \frac{d_1^2 + d_3^2 - b^2}{2d_1 d_3}, \label{eq:cos-beta} \\
+\cos(\alpha + \beta) &= \frac{d_1^2 + d_2^2 - c^2}{2d_1 d_2}. \label{eq:cos-gamma}
+\end{align}
+
+These three equations are not independent: the third is determined by the first two via the cosine addition formula:
+\begin{equation}
+\cos(\alpha + \beta) = \cos\alpha \cos\beta - \sin\alpha \sin\beta.
+\end{equation}
+
+\subsection{The Consistency Equation}
+
+Substituting~\eqref{eq:cos-alpha} and~\eqref{eq:cos-beta} into the cosine addition formula and setting equal to~\eqref{eq:cos-gamma}:
+
+\begin{equation}
+\label{eq:consistency}
+\frac{d_1^2 + d_2^2 - c^2}{2d_1 d_2} = \frac{(d_2^2 + d_3^2 - a^2)(d_1^2 + d_3^2 - b^2)}{4d_1 d_2 d_3^2} - \frac{\sqrt{(4d_2^2 d_3^2 - (d_2^2 + d_3^2 - a^2)^2)(4d_1^2 d_3^2 - (d_1^2 + d_3^2 - b^2)^2)}}{4d_1 d_2 d_3^2}.
+\end{equation}
+
+This is the \emph{consistency equation}: it must hold for any valid triple $(a, b, c)$ arising from the VDPP with distances $(d_1, d_2, d_3)$.
+
+\subsection{Eliminating the Square Root}
+
+To obtain a polynomial relation, isolate the square root term and square both sides:
+
+Let:
+\begin{align}
+u &= d_2^2 + d_3^2 - a^2, \label{eq:u-def} \\
+v &= d_1^2 + d_3^2 - b^2, \label{eq:v-def} \\
+w &= d_1^2 + d_2^2 - c^2. \label{eq:w-def}
+\end{align}
+
+Then~\eqref{eq:consistency} becomes:
+\begin{equation}
+2d_3^2 w = uv - \sqrt{(4d_2^2 d_3^2 - u^2)(4d_1^2 d_3^2 - v^2)}.
+\end{equation}
+
+Rearranging and squaring:
+\begin{equation}
+(uv - 2d_3^2 w)^2 = (4d_2^2 d_3^2 - u^2)(4d_1^2 d_3^2 - v^2).
+\end{equation}
+
+\begin{theorem}[The Master Polynomial]
+\label{thm:master-polynomial}
+Expanding and simplifying, the consistency equation yields:
+\begin{equation}
+\label{eq:master-poly}
+u^2 v^2 - 4d_3^2 uvw + 4d_3^4 w^2 = 4d_2^2 d_3^2 \cdot 4d_1^2 d_3^2 - 4d_2^2 d_3^2 v^2 - 4d_1^2 d_3^2 u^2 + u^2 v^2.
+\end{equation}
+
+After cancellation:
+\begin{equation}
+\label{eq:master-simplified}
+- 4d_3^2 uvw + 4d_3^4 w^2 = 16d_1^2 d_2^2 d_3^4 - 4d_2^2 d_3^2 v^2 - 4d_1^2 d_3^2 u^2.
+\end{equation}
+
+Dividing by $4d_3^2$:
+\begin{equation}
+\label{eq:master-final}
+\boxed{d_3^2 w^2 - uvw + d_2^2 v^2 + d_1^2 u^2 - 4d_1^2 d_2^2 d_3^2 = 0,}
+\end{equation}
+where $u$, $v$, $w$ are defined by~\eqref{eq:u-def}--\eqref{eq:w-def}.
+\end{theorem}
+
+\begin{remark}
+Equation~\eqref{eq:master-final} is equivalent to the vanishing of the Cayley--Menger determinant $\CM_4 = 0$, confirming that both approaches yield the same polynomial constraint.
+\end{remark}
+
+\section{Degree Analysis}
+
+Substituting $u = d_2^2 + d_3^2 - a^2$, $v = d_1^2 + d_3^2 - b^2$, $w = d_1^2 + d_2^2 - c^2$ into~\eqref{eq:master-final}:
+
+\begin{itemize}
+    \item Each of $u, v, w$ is a polynomial of degree 2 in the side lengths $a, b, c$ (after treating $d_1, d_2, d_3$ as constants).
+    \item The terms $u^2$, $v^2$, $w^2$ are degree 4 in side lengths.
+    \item The term $uvw$ is degree 6 in side lengths.
+\end{itemize}
+
+Therefore, the master polynomial~\eqref{eq:master-final} is of \textbf{degree 6} in $(a, b, c)$, or equivalently, degree 3 in $(a^2, b^2, c^2)$.
+
+\section{The Sextic Polynomial}
+
+For fixed $(d_1, d_2, d_3)$ and with one additional constraint (e.g., fixing one side length), the master polynomial becomes a univariate polynomial. The degree of this polynomial depends on the constraint:
+
+\begin{itemize}
+    \item \textbf{Equilateral constraint} ($a = b = c = s$): Degree 6 in $s$, but reduces to degree 3 in $s^2$, hence a cubic in $s^2$.
+    \item \textbf{Isosceles constraint} ($b = c$): Degree 6 in $a$ (with $b$ related to $a$ through the constraint).
+    \item \textbf{One side fixed}: Degree 6 in the remaining two sides.
+\end{itemize}
+
+\section{Perimeter Bounds from the Analytical Framework}
+
+From the parameterization~\eqref{eq:a-of-alpha}--\eqref{eq:c-of-alpha-beta}, we can derive bounds on each side length:
+
+\begin{proposition}[Side Length Bounds]
+For each side, the extreme values over the feasible domain are:
+\begin{align}
+\abs{d_2 - d_3} &< a < d_2 + d_3, \\
+\abs{d_1 - d_3} &< b < d_1 + d_3, \\
+\abs{d_1 - d_2} &< c < d_1 + d_2.
+\end{align}
+The upper bounds are achieved as the corresponding angle at $P$ approaches $\pi$; the lower bounds are achieved as it approaches $0$.
+\end{proposition}
+
+\begin{corollary}[Perimeter Bounds]
+\begin{equation}
+\perim_{\min} \leq \perim \leq \perim_{\max},
+\end{equation}
+where:
+\begin{align}
+\perim_{\max} &< (d_2 + d_3) + (d_1 + d_3) + (d_1 + d_2) = 2(d_1 + d_2 + d_3), \\
+\perim_{\min} &> \abs{d_2 - d_3} + \abs{d_1 - d_3} + \abs{d_1 - d_2}.
+\end{align}
+The exact extremal values are attained at boundary configurations of the feasible domain $\Omega$.
+\end{corollary}

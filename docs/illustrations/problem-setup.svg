@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d" />
+      <stop offset="100%" stop-color="#141c33" />
+    </linearGradient>
+    <linearGradient id="triFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#334155" stop-opacity="0.4" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" rx="16" fill="url(#bgGrad)" />
+  <rect width="796" height="596" x="2" y="2" rx="14" fill="none" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.2" />
+
+  <!-- Title -->
+  <text x="400" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#f8fafc" text-anchor="middle" letter-spacing="1">
+    THE VERTEX-DISTANCE PERIMETER PROBLEM
+  </text>
+  <text x="400" y="75" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">
+    Given interior point P and distances d₁, d₂, d₃ — reconstruct perimeter 𝒫 = a + b + c
+  </text>
+
+  <!-- Coordinates: A(400, 110), B(150, 480), C(680, 460), P(390, 360) -->
+  <!-- Triangle Polygon -->
+  <polygon points="400,110 150,480 680,460" fill="url(#triFill)" stroke="#38bdf8" stroke-width="3" />
+
+  <!-- Distance Rays from P to vertices -->
+  <line x1="390" y1="360" x2="400" y2="110" stroke="#f43f5e" stroke-width="2.5" stroke-dasharray="6,4" />
+  <line x1="390" y1="360" x2="150" y2="480" stroke="#10b981" stroke-width="2.5" stroke-dasharray="6,4" />
+  <line x1="390" y1="360" x2="680" y2="460" stroke="#fbbf24" stroke-width="2.5" stroke-dasharray="6,4" />
+
+  <!-- Vertices -->
+  <circle cx="400" cy="110" r="8" fill="#38bdf8" filter="url(#glow)" />
+  <text x="400" y="90" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#38bdf8" text-anchor="middle">A</text>
+
+  <circle cx="150" cy="480" r="8" fill="#38bdf8" filter="url(#glow)" />
+  <text x="130" y="505" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#38bdf8" text-anchor="middle">B</text>
+
+  <circle cx="680" cy="460" r="8" fill="#38bdf8" filter="url(#glow)" />
+  <text x="705" y="480" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#38bdf8" text-anchor="middle">C</text>
+
+  <!-- Point P -->
+  <circle cx="390" cy="360" r="9" fill="#e11d48" filter="url(#glow)" />
+  <circle cx="390" cy="360" r="4" fill="#ffffff" />
+  <text x="415" y="375" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#fb7185">P</text>
+
+  <!-- Distance Labels -->
+  <rect x="365" y="220" width="60" height="26" rx="6" fill="#0f172a" fill-opacity="0.85" stroke="#f43f5e" stroke-width="1" />
+  <text x="395" y="238" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#f43f5e" text-anchor="middle">d₁ = PA</text>
+
+  <rect x="230" y="405" width="60" height="26" rx="6" fill="#0f172a" fill-opacity="0.85" stroke="#10b981" stroke-width="1" />
+  <text x="260" y="423" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#10b981" text-anchor="middle">d₂ = PB</text>
+
+  <rect x="520" y="395" width="60" height="26" rx="6" fill="#0f172a" fill-opacity="0.85" stroke="#fbbf24" stroke-width="1" />
+  <text x="550" y="413" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#fbbf24" text-anchor="middle">d₃ = PC</text>
+
+  <!-- Side Labels -->
+  <text x="250" y="280" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#94a3b8">c = AB</text>
+  <text x="560" y="270" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#94a3b8">b = AC</text>
+  <text x="415" y="505" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#94a3b8" text-anchor="middle">a = BC</text>
+
+  <!-- Subtended Angles at P -->
+  <path d="M 390 325 A 35 35 0 0 0 358 375" fill="none" stroke="#a855f7" stroke-width="2" />
+  <text x="345" y="340" font-family="system-ui, sans-serif" font-size="13" fill="#c084fc">α</text>
+
+  <path d="M 370 385 A 35 35 0 0 0 422 375" fill="none" stroke="#06b6d4" stroke-width="2" />
+  <text x="400" y="405" font-family="system-ui, sans-serif" font-size="13" fill="#22d3ee">β</text>
+
+  <!-- Bottom Infobox -->
+  <rect x="80" y="530" width="640" height="42" rx="8" fill="#1e293b" fill-opacity="0.9" stroke="#475569" stroke-width="1" />
+  <text x="400" y="556" font-family="system-ui, sans-serif" font-size="13" fill="#e2e8f0" text-anchor="middle">
+    Degrees of Freedom: 5 Unknowns (3 sides + 2 point coords) - 3 Measurements = 2-DoF Underdetermined Manifold
+  </text>
+</svg>
