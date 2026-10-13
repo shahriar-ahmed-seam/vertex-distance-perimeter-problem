@@ -30,7 +30,7 @@ a^2 &= d_2^2 + d_3^2 - 2d_2 d_3 \cos \beta, \\
 b^2 &= d_3^2 + d_1^2 - 2d_3 d_1 \cos(\alpha + \beta).
 \end{align}
 
-When an auxiliary target constraint is imposed—such as seeking an equilateral triangle where $F_1(\alpha, \beta) = a^2 - b^2 = 0$ and $F_2(\alpha, \beta) = b^2 - c^2 = 0$—we obtain a vector system:
+When an auxiliary target constraint is imposed---such as seeking an equilateral triangle where $F_1(\alpha, \beta) = a^2 - b^2 = 0$ and $F_2(\alpha, \beta) = b^2 - c^2 = 0$---we obtain a vector system:
 \begin{equation}
 \mathbf{F}(\mathbf{x}) = \begin{pmatrix} F_1(\alpha, \beta) \\ F_2(\alpha, \beta) \end{pmatrix} = \mathbf{0}, \quad \mathbf{x} = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}.
 \end{equation}
@@ -81,7 +81,7 @@ v_t &= \beta_2 v_{t-1} + (1 - \beta_2) g_t^2, \\
 with default hyperparameters $\eta = 0.01, \beta_1 = 0.9, \beta_2 = 0.999, \epsilon = 10^{-8}$.
 
 \section{Nelder--Mead Simplex Optimization}
-For objective functions where analytic Jacobians are difficult to compute—such as non-differentiable shape penalties or black-box geometric constraints—the Nelder--Mead simplex method in $n$ dimensions provides robust derivative-free convergence.
+For objective functions where analytic Jacobians are difficult to compute---such as non-differentiable shape penalties or black-box geometric constraints---the Nelder--Mead simplex method in $n$ dimensions provides robust derivative-free convergence.
 
 For a 2D parameter space $\mathbf{x} = (\alpha, \beta)$, the simplex consists of 3 vertices $\{\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3\}$ ordered such that $f(\mathbf{x}_1) \le f(\mathbf{x}_2) \le f(\mathbf{x}_3)$. At each iteration, the standard operations are applied:
 \begin{enumerate}

@@ -1,28 +1,28 @@
-# Contributing to The Vertex-Distance Perimeter Theorem
+# Contributing to The Vertex-Distance Perimeter Problem
 
-Thank you for your interest in contributing! This project spans mathematics, computer science, and interactive visualization, so there are many ways to get involved.
+Thank you for your interest in contributing to this project. Contributions across mathematics, scientific computing, and interactive visualization are welcomed.
 
-## 🧮 Mathematical Contributions
+## Mathematical Contributions
 
-- **New proofs or simplifications** of existing theorems
-- **New special cases** (e.g., specific triangle types not yet covered)
-- **Corrections** to any mathematical errors
-- **New geometric invariants** or relationships
+- New proofs, generalizations, or simplifications of existing formulations
+- Novel constrained cases (e.g., specialized triangle geometries)
+- Corrections to mathematical statements or derivations
+- Geometric invariants and metric distance identities
 
-Please write mathematical content in LaTeX, following the notation conventions in `docs/paper/chapters/`.
+Please format mathematical contributions in LaTeX, adhering to the notation in `docs/paper/chapters/`.
 
 ### Notation Conventions
 - Triangle vertices: `A, B, C` (uppercase)
 - Interior point: `P`
 - Distances from P to vertices: `d_1, d_2, d_3`
 - Side lengths: `a` (opposite A), `b` (opposite B), `c` (opposite C)
-- Angles at P: `\alpha, \beta, \gamma` (opposite the respective sides)
+- Subtended angles at P: `\alpha, \beta, \gamma` (opposite the respective sides)
 - Perimeter: `\mathcal{P} = a + b + c`
 - Semi-perimeter: `s = \mathcal{P}/2`
 
-## 💻 Code Contributions
+## Code Contributions
 
-### Setting Up Development
+### Development Setup
 
 ```bash
 # Python engine
@@ -48,45 +48,26 @@ wasm-pack build --target web
 ```
 
 ### Code Style
-- **Python**: Follow PEP 8. Use type hints everywhere. Docstrings in NumPy format.
-- **TypeScript**: ESLint + Prettier. Strict mode. JSDoc comments.
-- **Go**: `gofmt`. Standard Go conventions. Comments on all exported symbols.
-- **Rust**: `rustfmt`. Clippy-clean. Doc comments with examples.
+- **Python**: PEP 8 compliance, explicit type annotations, docstrings.
+- **TypeScript**: Strict mode, clean ES module syntax, JSDoc comments.
+- **Go**: `gofmt`, standard idiomatic conventions, comments on exported symbols.
+- **Rust**: `rustfmt`, Clippy-clean, doc comments.
 
 ### Adding a New Solver
-1. Implement the solver in `engines/<language>/src/`
-2. Add comprehensive tests in `engines/<language>/tests/`
-3. Add the solver to the benchmark suite in `data/benchmarks/`
-4. Update the web UI solver dropdown in `web/src/components/panels/SolverPanel.ts`
+1. Implement the numerical or symbolic routine in `engines/<language>/src/`
+2. Add unit tests in `engines/<language>/tests/`
+3. Include the solver in the benchmark runner under `data/benchmarks/`
+4. Update the web application solver views
 5. Document the algorithm in `docs/paper/chapters/19-numerical-methods.tex`
 
-### Adding a New Triangle Type
-1. Add the classification logic in `triangle_classifier.py` (and equivalents)
-2. Derive the specialized formula in a new LaTeX chapter
-3. Add test cases with known solutions
-4. Update the web UI type selector
-
-## 🎨 UI/UX Contributions
-- Follow the design system defined in `web/src/styles/global.css`
-- Maintain dark/light mode support
-- Ensure responsive design (mobile-first)
-- Test with keyboard navigation and screen readers
-
-## 📝 Pull Request Process
+## Pull Request Process
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Make your changes
-4. Run all tests: `./infra/scripts/test-all.sh`
-5. Submit a PR with a clear description
+3. Ensure all tests pass across engines
+4. Submit a Pull Request with a clear, descriptive summary of changes
 
-## 🐛 Bug Reports
-Use the [bug report template](.github/ISSUE_TEMPLATE/bug_report.md).
+## Bug Reports and Discussion
+Submit issues through GitHub Issues for bugs, enhancements, or mathematical discussions.
 
-## 💡 Feature Requests
-Use the [feature request template](.github/ISSUE_TEMPLATE/feature_request.md).
-
-## 🧮 Mathematical Discussions
-Use the [math discussion template](.github/ISSUE_TEMPLATE/math_discussion.md) for proposing new theorems, questioning existing proofs, or suggesting alternative approaches.
-
-## 📜 Code of Conduct
-Please read and follow our [Code of Conduct](.github/CODE_OF_CONDUCT.md).
+## License
+By contributing, you agree that your contributions will be licensed under the MIT License.

@@ -5,16 +5,14 @@ export function renderSolverBenchmarkPage(container: HTMLElement) {
     <div class="dashboard-grid fade-in">
       <div class="card" style="grid-column: span 2;">
         <div class="card-header">
-          <h2 class="card-title">
-            <span>⚡</span> Real-Time Multi-Solver Tournament Benchmark
-          </h2>
+          <h2 class="card-title">Real-Time Multi-Solver Tournament Benchmark</h2>
           <div style="display: flex; gap: 0.5rem;">
-            <button class="btn btn-primary btn-sm" id="btn-run-race">▶ Run Benchmark</button>
+            <button class="btn btn-primary btn-sm" id="btn-run-race">Run Benchmark</button>
           </div>
         </div>
 
         <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1.25rem;">
-          Executes all mathematical solvers concurrently on distance triplet <strong>(d₁=3, d₂=4, d₃=5)</strong> targeting the equilateral perimeter ground truth (𝒫 = 3√(25 + 12√3) ≈ 20.2993).
+          Executes all mathematical solvers concurrently on distance triplet <strong>(d₁=3, d₂=4, d₃=5)</strong> targeting the equilateral perimeter ground truth (P = 3√(25 + 12√3) ≈ 20.2993).
         </p>
 
         <!-- Benchmark Results Table -->
@@ -27,7 +25,7 @@ export function renderSolverBenchmarkPage(container: HTMLElement) {
                 <th style="padding: 0.75rem 1rem;">Status</th>
                 <th style="padding: 0.75rem 1rem;">Iterations</th>
                 <th style="padding: 0.75rem 1rem;">Time (ms)</th>
-                <th style="padding: 0.75rem 1rem;">Reconstructed 𝒫</th>
+                <th style="padding: 0.75rem 1rem;">Reconstructed P</th>
                 <th style="padding: 0.75rem 1rem;">Residual Error</th>
               </tr>
             </thead>

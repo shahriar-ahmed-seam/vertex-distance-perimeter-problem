@@ -6,9 +6,7 @@ export function renderSandboxPage(container: HTMLElement) {
       <!-- Left: Interactive Canvas -->
       <div class="card" style="padding: 1rem;">
         <div class="card-header" style="margin-bottom: 0.75rem;">
-          <h2 class="card-title">
-            <span>📐</span> Interactive Triangle Canvas
-          </h2>
+          <h2 class="card-title">Interactive Triangle Canvas</h2>
           <div class="preset-buttons" style="margin-bottom: 0;">
             <button class="btn btn-sm" id="btn-preset-eq">Equilateral</button>
             <button class="btn btn-sm" id="btn-preset-right">Right Angle</button>
@@ -20,7 +18,7 @@ export function renderSandboxPage(container: HTMLElement) {
         <div class="canvas-container">
           <canvas id="triangle-canvas" width="900" height="580"></canvas>
           <div class="canvas-overlay-hints">
-            <span class="hint-badge">💡 Drag A, B, C or P</span>
+            <span class="hint-badge">Drag A, B, C or P</span>
             <span class="hint-badge" id="interior-badge">Interior: Valid</span>
           </div>
         </div>
@@ -29,15 +27,13 @@ export function renderSandboxPage(container: HTMLElement) {
       <!-- Right: Real-Time Metrics & Properties Panel -->
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title">
-            <span>📊</span> Live Geometric Metrics
-          </h2>
+          <h2 class="card-title">Live Geometric Metrics</h2>
         </div>
 
         <!-- Primary Highlight: Perimeter -->
         <div class="stats-grid">
           <div class="stat-box highlight">
-            <span class="stat-label">Computed Perimeter (𝒫 = a + b + c)</span>
+            <span class="stat-label">Computed Perimeter (P = a + b + c)</span>
             <span class="stat-value glow-cyan" id="metric-perim">0.00</span>
           </div>
 

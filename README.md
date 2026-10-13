@@ -1,8 +1,6 @@
-<div align="center">
+# The Vertex-Distance Perimeter Problem
 
-# 🔺 The Vertex-Distance Perimeter Theorem
-
-### *"Three distances. Infinite triangles. One deep truth."*
+### Analytical Foundations, Numerical Solvers, and Multi-Geometry Extensions
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](engines/python/)
@@ -13,136 +11,120 @@
 
 ---
 
-**Given a triangle △ABC and an interior point P with known distances PA = d₁, PB = d₂, PC = d₃ — what can we determine about the triangle?**
+## Abstract
 
-</div>
+Given a planar triangle ABC and an interior point P with known Euclidean distances $d_1 = PA$, $d_2 = PB$, $d_3 = PC$, determine the perimeter $\mathcal{P} = a + b + c$ of the triangle.
 
----
+In the unconstrained Euclidean plane, a triangle possesses 3 intrinsic degrees of freedom (its side lengths $a, b, c$), and an interior point introduces 2 coordinate degrees of freedom ($x_P, y_P$). With only three scalar distance measurements $(d_1, d_2, d_3)$, the problem is underdetermined by two degrees of freedom. Fixing rigid rotational gauge leaves a one-dimensional continuous solution manifold of valid triangles. 
 
-## 🧮 The Problem
-
-Place any triangle in the plane. Pick any point inside it. Measure the straight-line distances from that point to each vertex. That's all you know.
-
-**Can you reconstruct the triangle? Can you find its perimeter?**
-
-The answer is surprising: **no single triangle satisfies those distances — infinitely many do.** The three distances constrain the triangle to lie on a **one-dimensional solution manifold** — a continuous curve of valid triangles. This project explores that manifold from every conceivable angle.
-
-## 🏗️ What This Project Contains
-
-### 📚 Academic Documentation
-An 80+ page LaTeX research paper covering:
-- Complete historical timeline (Euclid → Cayley → Menger → Pompeiu)
-- Rigorous degrees-of-freedom analysis
-- The Cayley-Menger determinant and its expansion
-- Pompeiu's theorem and Van Schooten's theorem
-- Stewart's theorem and Leibniz formula connections
-- Closed-form solutions for equilateral, isosceles, and right triangles
-- Existence and uniqueness proofs
-- Generalized master formula
-
-### 💻 Computational Engines
-Industrial-strength solvers in **4 languages**:
-
-| Engine | Purpose | Solvers |
-|--------|---------|---------|
-| **Python** (SymPy) | Symbolic ground truth | Exact algebraic, Newton-Raphson, Gradient Descent, Nelder-Mead, Bisection-Secant |
-| **TypeScript** | Browser runtime | All numeric solvers optimized for V8 |
-| **Go** | High-throughput batch | Concurrent goroutine-based solving |
-| **Rust → WASM** | Near-native web speed | Core loops compiled to WebAssembly |
-
-### 🌐 Interactive Web Simulations
-A premium web application with **7 interactive pages**:
-- 🎮 **Dynamic Sandbox** — Drag vertices and point P in real time
-- 🔄 **Inverse Finder** — Type distances, watch triangles morph
-- 📊 **Error Landscape** — WebGL heatmap of the optimization surface
-- 📈 **Convergence Visualizer** — Watch solvers race to solutions
-- 🌐 **3D Geometry Viewer** — Three.js visualization of geometric constraints
-- 📖 **Theory Explorer** — Interactive step-by-step proofs
-- ℹ️ **About** — References and academic context
-
-### 📈 Data Science & ML
-- 1M+ synthetic triangle dataset
-- Cross-language performance benchmarks
-- Neural network perimeter predictor
-- Floating-point precision analysis
-
-### 🌍 Geometry Extensions
-- **Spherical geometry** (triangles on a sphere)
-- **Hyperbolic geometry** (Poincaré disk model)
-- **3D tetrahedron** generalization
-
-### 🔒 Formal Verification
-Core theorems machine-checked in **Lean 4**.
+This repository provides an exhaustive academic monograph, exact symbolic solutions for constrained symmetries (equilateral, isosceles, right-angled), high-performance numerical engines in four programming languages, an interactive web simulation suite, and formal verifications in Lean 4.
 
 ---
 
-## 🚀 Quick Start
+## Research Monograph
+
+A complete 74-page LaTeX monograph is compiled and available in the repository:
+- **PDF Document:** [`The_Vertex_Distance_Perimeter_Problem.pdf`](The_Vertex_Distance_Perimeter_Problem.pdf)
+- **Source Directory:** [`docs/paper/`](docs/paper/)
+
+### Table of Contents
+1. **Abstract & Problem Foundations** (`01-abstract.tex`)
+2. **Introduction & Motivation** (`02-introduction.tex`)
+3. **Historical Timeline: Euclid, Cayley, Menger, Pompeiu** (`03-historical-timeline.tex`)
+4. **Problem Formulation & Polar Geometry** (`04-problem-formulation.tex`)
+5. **Degrees of Freedom & Gauge Analysis** (`05-degrees-of-freedom.tex`)
+6. **The Cayley-Menger Bordered Determinant** (`06-cayley-menger.tex`)
+7. **Pompeiu's and Van Schooten's Theorems** (`07-pompeiu-theorem.tex`)
+8. **Stewart and Leibniz Relations** (`08-stewart-leibniz.tex`)
+9. **Analytical Derivations & Algebraic Geometry** (`09-analytical-derivation.tex`)
+10. **Existence and Uniqueness Manifolds** (`10-existence-uniqueness.tex`)
+11. **The Equilateral Case (Closed-Form Solution)** (`11-equilateral-case.tex`)
+12. **The Isosceles Triangle Case** (`12-isosceles-case.tex`)
+13. **The Right Triangle Case** (`13-right-triangle-case.tex`)
+14. **Acute and Obtuse Configurations** (`14-acute-obtuse-cases.tex`)
+15. **The Master Generalized Formula** (`15-generalized-formula.tex`)
+16. **Spherical Geometry Extension** (`16-spherical-extension.tex`)
+17. **Hyperbolic Geometry Extension** (`17-hyperbolic-extension.tex`)
+18. **3D Tetrahedron Generalization** (`18-3d-tetrahedron.tex`)
+19. **Numerical Methods & Optimization** (`19-numerical-methods.tex`)
+20. **Computational Benchmarks & Experimental Results** (`20-computational-results.tex`)
+21. **Conclusion & Open Questions** (`21-conclusion.tex`)
+
+---
+
+## Mathematical Formulation
+
+The relationship between the vertex distances and triangle edges is governed by the $5 \times 5$ Cayley-Menger bordered determinant. For four coplanar points $\{A, B, C, P\}$, the determinant vanishes:
+
+$$\det \begin{pmatrix} 0 & 1 & 1 & 1 & 1 \\ 1 & 0 & c^2 & b^2 & d_1^2 \\ 1 & c^2 & 0 & a^2 & d_2^2 \\ 1 & b^2 & a^2 & 0 & d_3^2 \\ 1 & d_1^2 & d_2^2 & d_3^2 & 0 \end{pmatrix} = 0$$
+
+For the equilateral configuration where $a = b = c = s$, algebraic reduction yields:
+
+$$3(s^4 + d_1^4 + d_2^4 + d_3^4) = (s^2 + d_1^2 + d_2^2 + d_3^2)^2$$
+
+Letting $u = s^2$, $S = d_1^2 + d_2^2 + d_3^2$, and $Q = d_1^4 + d_2^4 + d_3^4$:
+
+$$2u^2 - 2Su + (3Q - S^2) = 0$$
+
+For an interior point $P$, the unique admissible root is:
+
+$$s = \sqrt{\frac{S + \sqrt{12S^2 - 24Q}}{2}} = \sqrt{\frac{d_1^2 + d_2^2 + d_3^2 + 4\sqrt{3}\,\text{Area}_{\text{Pompeiu}}}{2}}$$
+
+The perimeter is strictly given by $\mathcal{P} = 3s$.
+
+---
+
+## Computational Engines
+
+| Language | Directory | Capabilities |
+|---|---|---|
+| **Python** | [`engines/python/`](engines/python/) | Symbolic elimination via SymPy, Gröbner bases, 2D Newton-Raphson, Adam optimizer, Nelder-Mead simplex, and Bisection-Secant. |
+| **Go** | [`engines/go/`](engines/go/) | Compiled high-throughput solver with concurrent goroutine execution and CLI interface. |
+| **TypeScript** | [`engines/typescript/`](engines/typescript/) | Browser/Node.js library with typed geometry utilities and compensated floating-point evaluators. |
+| **Rust / WASM** | [`engines/rust-wasm/`](engines/rust-wasm/) | Native routines compiled to WebAssembly via `wasm-bindgen`. |
+
+---
+
+## Interactive Web Laboratory
+
+An interactive web suite is available in [`web/`](web/):
+- **Interactive Sandbox:** Dynamic canvas allowing manipulation of vertices $A, B, C$ and point $P$ with real-time distance rays, angle sectors, and metrics.
+- **Inverse Manifold Explorer:** Input distance triplets $(d_1, d_2, d_3)$ and traverse the 1D parameter $\alpha = \angle APB$ to inspect the family of valid triangles.
+- **Solver Benchmark Tournament:** Real-time multi-algorithm benchmark comparing symbolic and iterative solvers.
+- **Objective Landscape:** 2D heatmap over angle space $(\alpha, \beta)$ showing the loss valley and solver paths.
+- **Theory & Proofs:** Mathematical expositions including Pompeiu's rotation proof and determinant expansions.
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/triangle-thm.git
-cd triangle-thm
-
-# Run the Python solver
-cd engines/python
-pip install -e .
-python -m triangle_thm --d1 3 --d2 4 --d3 5 --type equilateral
-
-# Launch the web application
-cd ../../web
+# Launch web application
+cd web
 npm install
 npm run dev
-
-# Run all tests
-./infra/scripts/test-all.sh
 ```
-
-## 📖 Mathematical Essence
-
-The core relationship is encoded in the **Cayley-Menger determinant**. For four coplanar points (three vertices A, B, C and interior point P), the following 5×5 determinant must vanish:
-
-```
-| 0    1     1     1     1   |
-| 1    0     c²    b²    d₁² |
-| 1    c²    0     a²    d₂² | = 0
-| 1    b²    a²    0     d₃² |
-| 1    d₁²   d₂²   d₃²   0  |
-```
-
-This single equation links the three known distances (d₁, d₂, d₃) to the three unknown side lengths (a, b, c), yielding a rich polynomial constraint that is the foundation of everything in this project.
-
-## 📁 Repository Structure
-
-```
-triangle-thm/
-├── docs/          📚 LaTeX paper, illustrations, Docusaurus site
-├── engines/       💻 Python, TypeScript, Go, Rust solvers
-├── web/           🌐 Interactive web application
-├── data/          📈 Benchmarks, datasets, ML models
-├── proofs/        🔒 Lean 4 formal proofs
-├── extensions/    🌍 Spherical, hyperbolic, 3D extensions
-└── infra/         🛠️ Docker, CI/CD, scripts
-```
-
-## 🤝 Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. We welcome:
-- 🧮 Mathematical improvements and new proofs
-- 💻 New solver algorithms
-- 🎨 UI/UX enhancements
-- 📚 Documentation and translations
-- 🐛 Bug reports and test cases
-
-## 📄 License
-
-This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
 
 ---
 
-<div align="center">
+## Synthetic Datasets and Benchmarks
 
-*Built with mathematical rigor and engineering ambition.*
+The [`data/`](data/) directory provides tools for dataset generation and cross-language validation:
+- [`data/datasets/generator.py`](data/datasets/generator.py): Samples valid triangles with interior points and generates CSV/JSON datasets.
+- [`data/benchmarks/bench_runner.py`](data/benchmarks/bench_runner.py): Compares execution time and residual accuracy across Go, TypeScript, and Python.
 
-**⭐ Star this repo if you love geometry!**
+---
 
-</div>
+## Non-Euclidean Extensions
+
+- **Spherical Geometry ($S^2$):** Great-circle distance transformations via the spherical law of cosines ([`extensions/spherical/`](extensions/spherical/)).
+- **Hyperbolic Geometry ($\mathbb{H}^2$):** Poincaré disk metric calculations ([`extensions/hyperbolic/`](extensions/hyperbolic/)).
+- **3D Tetrahedron:** Extension to 3D simplices utilizing the $6 \times 6$ Cayley-Menger determinant ([`extensions/tetrahedron/`](extensions/tetrahedron/)).
+
+---
+
+## Formal Verification
+
+Core geometric definitions and algebraic theorems are formalized in Lean 4 under [`proofs/TriangleThm/`](proofs/TriangleThm/).
+
+---
+
+## License
+
+This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.

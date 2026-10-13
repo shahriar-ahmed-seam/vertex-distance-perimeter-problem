@@ -5,9 +5,7 @@ export function renderErrorLandscapePage(container: HTMLElement) {
     <div class="dashboard-grid fade-in">
       <div class="card" style="padding: 1rem;">
         <div class="card-header" style="margin-bottom: 0.75rem;">
-          <h2 class="card-title">
-            <span>📊</span> 2D Objective Landscape & Optimization Basin
-          </h2>
+          <h2 class="card-title">2D Objective Landscape & Optimization Basin</h2>
           <span class="brand-badge">Loss: log₁₀(Residual)</span>
         </div>
 
@@ -19,9 +17,7 @@ export function renderErrorLandscapePage(container: HTMLElement) {
       <!-- Right Controls & Info -->
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title">
-            <span>🗺️</span> Topology Overview
-          </h2>
+          <h2 class="card-title">Topology Overview</h2>
         </div>
 
         <div style="font-size: 0.85rem; color: #94a3b8; line-height: 1.6; margin-bottom: 1.25rem;">

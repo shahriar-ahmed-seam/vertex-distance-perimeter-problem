@@ -6,9 +6,7 @@ export function renderInverseFinderPage(container: HTMLElement) {
       <!-- Left: Morphing Triangle Canvas & Manifold Curve -->
       <div class="card" style="padding: 1rem;">
         <div class="card-header" style="margin-bottom: 0.75rem;">
-          <h2 class="card-title">
-            <span>🔄</span> Continuous Solution Manifold Explorer
-          </h2>
+          <h2 class="card-title">Continuous Solution Manifold Explorer</h2>
           <span class="brand-badge" id="manifold-badge">1D Free Parameter</span>
         </div>
 
@@ -27,7 +25,7 @@ export function renderInverseFinderPage(container: HTMLElement) {
 
         <!-- 2D Perimeter Manifold Chart -->
         <div style="margin-top: 1rem;">
-          <h3 style="font-size: 0.85rem; font-weight: 600; color: #94a3b8; margin-bottom: 0.5rem;">Perimeter Trajectory 𝒫(α) along Solution Manifold</h3>
+          <h3 style="font-size: 0.85rem; font-weight: 600; color: #94a3b8; margin-bottom: 0.5rem;">Perimeter Trajectory P(α) along Solution Manifold</h3>
           <canvas id="curve-canvas" width="900" height="130" style="width: 100%; height: 130px; background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px solid var(--border-subtle);"></canvas>
         </div>
       </div>
@@ -35,9 +33,7 @@ export function renderInverseFinderPage(container: HTMLElement) {
       <!-- Right: Distance Inputs & Exact Solutions Panel -->
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title">
-            <span>🎯</span> Input Distance Triplet
-          </h2>
+          <h2 class="card-title">Input Distance Triplet</h2>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1.25rem;">

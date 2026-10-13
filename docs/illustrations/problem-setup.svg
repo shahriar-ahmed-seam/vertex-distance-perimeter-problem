@@ -26,7 +26,7 @@
     THE VERTEX-DISTANCE PERIMETER PROBLEM
   </text>
   <text x="400" y="75" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">
-    Given interior point P and distances d₁, d₂, d₃ — reconstruct perimeter 𝒫 = a + b + c
+    Given interior point P and distances d1, d2, d3 - reconstruct perimeter P = a + b + c
   </text>
 
   <!-- Coordinates: A(400, 110), B(150, 480), C(680, 460), P(390, 360) -->

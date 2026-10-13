@@ -14,7 +14,7 @@ export function renderTheoryPage(container: HTMLElement) {
       <!-- Section 1: Degrees of Freedom -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title"><span>1️⃣</span> The Underdetermined Manifold & Degree of Freedom Deficit</h3>
+          <h3 class="card-title">1. The Underdetermined Manifold and Degree of Freedom Deficit</h3>
         </div>
         <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
           In Euclidean plane ℝ², any triangle has <strong>3 intrinsic degrees of freedom</strong> (its side lengths a, b, c). Specifying an arbitrary interior point P adds its 2 Cartesian coordinates (x, y). Thus, there are <strong>5 geometric unknowns</strong>:
@@ -36,7 +36,7 @@ export function renderTheoryPage(container: HTMLElement) {
       <!-- Section 2: Pompeiu's Theorem -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title"><span>2️⃣</span> Dimitrie Pompeiu's Theorem (1936)</h3>
+          <h3 class="card-title">2. Dimitrie Pompeiu's Theorem (1936)</h3>
         </div>
         <div class="math-callout" style="border-left-color: var(--accent-emerald);">
           <strong style="color: #34d399;">Theorem (Pompeiu, 1936):</strong>
@@ -60,7 +60,7 @@ export function renderTheoryPage(container: HTMLElement) {
       <!-- Section 3: The Cayley-Menger Determinant -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title"><span>3️⃣</span> The 5×5 Cayley-Menger Bordered Determinant</h3>
+          <h3 class="card-title">3. The 5×5 Cayley-Menger Bordered Determinant</h3>
         </div>
         <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
           In distance geometry (Arthur Cayley, 1841; Karl Menger, 1928), 4 points A, B, C, P are coplanar if and only if their 5×5 bordered distance matrix has determinant zero:
